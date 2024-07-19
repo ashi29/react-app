@@ -1,0 +1,35 @@
+.adminNavbar {
+  width: 100%;
+  background-color: white !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid #d2d2d2;
+  padding: 1rem;
+}
+
+.navbarText-1 {
+  font-family: "Vollkorn";
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  color: black;
+  text-wrap: nowrap;
+}
+
+.navbarText-2 {
+  font-family: "Arimo";
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+  text-wrap: nowrap !important;
+  color: #28a745 !important;
+}
+.search-input {
+  width: 25rem;
+  padding: 0.6rem 1.5rem 0.5rem 1rem;
+  gap: 0px;
+  opacity: 0px;
+  border-radius: 10px !important;
+  box-shadow: 0px 2px 5px 0px #0000000f, 0px 10px 10px 0px #0000000d,
+    0px 21px 13px 0px #00000008, 0px 38px 15px 0px #00000003,
+    0px 60px 17px 0px #00000000;
+}

@@ -1,0 +1,16 @@
+.object-title {
+  font-family: "Arimo" !important;
+  font-size: 85%;
+  font-weight: 700;
+  text-align: right;
+  padding-right: 8%;
+  padding-top: 1.5%;
+}
+
+.object-value {
+  font-family: "Arimo";
+  font-size: 85%;
+  font-weight: 400;
+  text-align: left;
+  padding-top: 1%;
+}

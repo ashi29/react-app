@@ -1,0 +1,45 @@
+.modal-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background-color: #fff;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.modal-close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.successErrormodal-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-heading {
+  font-family: "Arimo", sans-serif !important;
+  font-size: 140% !important;
+  font-weight: 700 !important;
+  text-align: center;
+  color: #5b5b5b;
+  margin: 0.7rem !important;
+}
+
+.modal-content-text {
+  color: #a2a2a2;
+  font-family: "Arimo", sans-serif;
+  font-size: 120%;
+  font-weight: 400;
+  line-height: 20.7px;
+  text-align: center !important;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}

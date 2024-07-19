@@ -1,0 +1,281 @@
+/*navbar*/
+.navBar {
+  background-color: #fff !important;
+  box-shadow: none !important;
+  position: fixed;
+}
+
+.navbar-logo {
+  padding-top: 1%;
+  margin-right: 0.5%;
+  width: 4% !important;
+  height: 4% !important;
+}
+.navButtons {
+  font-family: "Arimo", sans-serif !important;
+  font-weight: 400;
+  font-size: 1.1rem !important;
+  /* padding-left: 1rem; */
+  padding-right: 2.2rem !important;
+  margin-top: 0.3rem !important;
+  color: black !important;
+  text-decoration: none;
+  text-transform: none !important;
+  text-align: center !important;
+}
+
+.navButtons:hover {
+  color: rgba(83, 89, 231, 0.77);
+}
+
+.navList {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navLogo-text {
+  font-family: "Arimo", sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 160% !important;
+  color: rgba(29, 197, 226, 0.77) !important;
+  display: block;
+  flex-grow: 1;
+}
+
+.vollkorn-heading {
+  font-family: "Vollkorn", serif !important;
+  font-weight: 500 !important;
+  font-size: 180% !important;
+  color: rgba(83, 89, 231, 0.77);
+}
+
+.flex-and-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-sub-grid {
+  height: 55vh;
+}
+.iconCardGrid {
+  height: 15vh;
+  margin-top: 4% !important;
+  background-color: #ebfdff;
+  /* padding: 2%; */
+}
+
+.main-container-landing {
+  /* padding-top: 0.5rem; */
+  padding-left: 12%;
+  padding-right: 12%;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-grid {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.monsterrat-subheading-paragraph {
+  font-family: "Montserrat", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 400 !important;
+  font-style: normal;
+  width: 85% !important;
+  line-height: 1.8 !important;
+  padding-bottom: 3%;
+}
+
+.home-image img {
+  width: 100%;
+  height: auto;
+}
+
+.about-grid {
+  max-width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-us-grid {
+  height: 100%;
+  padding: 2rem;
+}
+
+.contact-us {
+  font-family: "Vollkorn", serif !important;
+  font-weight: 600 !important;
+  font-size: 2rem !important;
+  text-align: center;
+}
+.aboutSection1 {
+  /* background-color: #def3f5; */
+  padding: 3rem;
+}
+
+.about-section-heading1 {
+  font-family: "Vollkorn", serif !important;
+  font-weight: 500 !important;
+  font-size: 2rem !important;
+}
+
+.about-section-scrutinyGlobal {
+  font-family: "Vollkorn", serif !important;
+  font-weight: 600 !important;
+  font-size: 1.7rem !important;
+  color: rgba(16, 210, 244, 0.77) !important;
+}
+
+.about-section-scrutinyGlobal2 {
+  font-family: "Vollkorn", serif !important;
+  font-weight: 600 !important;
+  font-size: 2rem !important;
+  color: rgba(16, 210, 244, 0.77) !important;
+}
+
+.about-section-heading2 {
+  font-family: "Vollkorn", serif !important;
+  font-weight: 400 !important;
+  font-size: 1.4rem !important;
+}
+
+.about-section1-paragraph {
+  font-family: "Arimo", sans-serif !important;
+  font-size: 1rem !important;
+  padding-bottom: 1rem;
+}
+
+.aboutImage1 {
+  width: 100%;
+  height: 100%;
+}
+
+.aboutSection2 {
+  height: 70vh;
+}
+
+.aboutImage2 {
+  width: 100%;
+  /* display: ;
+  justify-content: center; */
+}
+
+.aboutSection3 {
+  height: 100%;
+  padding-bottom: 5%;
+  padding-top: 5%;
+}
+
+.aboutSection3-heading {
+  font-family: "Vollkorn", serif !important;
+  font-size: 2rem !important;
+  font-weight: 500 !important;
+}
+
+.tab-content-container {
+  padding-top: 2rem;
+  /* font-family: "Arimo", sans-serif !important; */
+}
+
+.tab-point {
+  font-family: "Arimo", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+  color: rgba(83, 89, 231, 0.77);
+}
+
+.tab-text {
+  font-family: "Arimo", sans-serif !important;
+  padding-bottom: 1rem;
+}
+
+.companyLogo {
+  width: 8vh;
+  height: 8vh;
+}
+
+.footerSection {
+  height: 100%;
+  padding: 2rem;
+}
+
+.footerText1 {
+  font-family: "Arimo";
+  font-size: 1rem;
+}
+
+.footerText2 {
+  font-family: "Arimo";
+  font-size: 1rem;
+  color: rgba(83, 89, 231, 0.77);
+}
+
+.contactUs2 {
+  height: 100%;
+  padding: 2rem;
+  margin-top: 5% !important;
+  background-color: aliceblue;
+}
+
+.contactUs2-heading {
+  font-family: "Arimo";
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  color: rgba(83, 89, 231, 0.77);
+}
+
+.contactUs2-text {
+  font-family: "Arimo";
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.contactUs1-smallbox {
+  background-color: aliceblue;
+  padding: 2rem;
+}
+
+.contactUs1-form {
+  /* padding: 2rem; */
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: row-reverse;
+}
+
+.contactus-form-grid {
+  height: 100%;
+}
+
+.smallBox-heading {
+  font-family: "Arimo" !important;
+  font-size: 140% !important;
+  font-weight: 600 !important;
+  color: rgba(83, 89, 231, 0.77);
+}
+
+.smallBox-text {
+  font-family: "Arimo" !important;
+  font-size: 85% !important;
+}
+
+.surveyContent-text {
+  font-family: "Arimo";
+  font-size: 2vh;
+}
+
+.addMargin {
+  margin-top: 2rem !important;
+}
+
+.icon {
+  color: #bdbdbd;
+}
+
+.icon:hover {
+  color: #62acc9;
+}

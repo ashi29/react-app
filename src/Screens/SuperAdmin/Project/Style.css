@@ -1,0 +1,97 @@
+.fixing-height {
+  height: 68vh;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: none !important;
+  border-top-right-radius: none !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+.fixed-heading {
+  background: #31baf4;
+  font-family: "Arimo";
+  font-size: 115%;
+  padding: 0.7rem;
+  font-weight: 600;
+  color: #ffffff;
+  width: 100%;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.add-client-datagrid {
+  width: 100%;
+}
+
+.datagrid-label {
+  font-family: "Arimo";
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  line-height: 18.4px;
+}
+
+.accordion-section {
+  padding: 2rem;
+}
+
+.add-project-header {
+  background: #31baf4;
+  color: white;
+}
+
+.accepted-RFQ-table {
+  padding: 2rem;
+}
+
+.quotation-grid {
+  padding: 1rem;
+  height: 60vh;
+}
+
+.add-margin-below {
+  margin-bottom: 30vh;
+}
+
+.vendor-name {
+  font-family: "Arimo" !important;
+  font-size: 100% !important;
+  font-weight: 700 !important;
+  padding-bottom: 0.2rem;
+  padding-top: 0.2rem;
+}
+
+.assign-vendor-container {
+  padding: 1.5rem;
+  margin-top: 1.8rem !important;
+  margin-left: 1.4rem !important;
+  width: 100%;
+  border: 1px solid #c6c5c5;
+  border-radius: 19px;
+  box-shadow: 0px 4px 9px 0px #00000008, 0px 17px 17px 0px #00000008,
+    0px 37px 22px 0px #00000005, 0px 66px 27px 0px #00000000,
+    0px 104px 29px 0px #00000000;
+}
+
+.assignVendor-parent-container {
+  margin-bottom: 10vh;
+}
+
+.assignVendor-list-datagrid {
+  width: 98%;
+  margin-top: 2%;
+  /* margin-left: 2rem !important; */
+}
+/* 
+.quotation-dropdown {
+  width: 80%;
+  padding: 2rem;
+} */
+
+.multi-select-grid {
+  margin-left: 5rem !important;
+  width: 100%;
+}

@@ -1,0 +1,130 @@
+.screenHeading {
+  font-family: "Vollkorn";
+  font-size: 160%;
+  font-weight: 600;
+  text-align: left;
+  color: #5b5b5b !important;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.heading-grid {
+  width: 100%;
+  min-height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.heading-grid2 {
+  width: 97% !important;
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-left: 3% !important;
+  margin-right: 3% !important;
+}
+
+.form-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1% !important;
+}
+.form-sub-grid {
+  padding: 1.2rem;
+  height: 100%;
+  width: 100%; /* Match the width of the content-grid */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-grid {
+  width: 85vh;
+}
+
+.client-button {
+  margin-bottom: 1.1rem !important;
+  min-width: 3rem !important;
+  text-transform: none !important;
+  box-shadow: 0px 2.79px 5.57px 0px #0000000f, 0px 9.75px 9.75px 0px #0000000d,
+    0px 22.29px 13.23px 0px #00000008, 0px 39.7px 16.02px 0px #00000003,
+    0px 61.98px 17.41px 0px #00000000;
+  font-family: "Arimo" !important;
+  /* font-size: 1.2rem !important; */
+  font-weight: 700 !important;
+  line-height: 18.4px;
+  text-align: center;
+}
+.delete-class {
+  border: 2.25px solid red !important;
+  color: red !important;
+}
+
+.add-class {
+  border: 2.25px solid #28a745 !important;
+  color: #28a745 !important;
+}
+
+.export-class {
+  border: 2.25px solid #001aff !important;
+  color: #001aff !important;
+}
+
+.client-detail-grid {
+  padding: 1.8rem;
+}
+
+.profile-detail-grid {
+  padding-left: 1.8rem;
+  padding-right: 1.8rem;
+  padding-bottom: 1.8rem;
+  padding-top: 0.2rem;
+}
+
+.section-heading {
+  background: #31baf4;
+  font-family: "Arimo";
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 25.31px;
+  color: #ffffff;
+  width: 95%;
+  padding: 0.8rem;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.2rem !important;
+}
+
+.two-in-a-row {
+  width: 100%;
+}
+.one-in-a-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.active-inactive-grid {
+  height: 30vh;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+.active-inactive {
+  font-family: "Arimo" !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-align: center;
+  padding-top: 0.4rem;
+  padding-left: 2rem;
+  color: #3a3a3b;
+}
+
+.client-list-datagrid {
+  width: 97%;
+  margin: 2% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

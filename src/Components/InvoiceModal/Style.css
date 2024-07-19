@@ -1,0 +1,56 @@
+.invoice-modal-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 85%;
+  max-height: 90vh;
+  background-color: #fff;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.invoice-grid {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 2rem !important;
+  margin-left: 2rem !important;
+  margin-right: 2rem !important;
+}
+
+.forBorder {
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+.forBorderTop {
+  border: 1px solid black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0.5rem;
+}
+
+.forBorderBottomLeft {
+  border: 1px solid black;
+  border-bottom-left-radius: 10px;
+  padding: 0.5rem;
+}
+
+.forBorderBottomRight {
+  border: 1px solid black;
+  border-bottom-right-radius: 10px;
+  padding: 0.5rem;
+}
+
+.invoiceLogo {
+  height: 8vh;
+}
+
+.muiIcon {
+  font-size: 5.6vh !important;
+}

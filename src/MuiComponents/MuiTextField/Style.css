@@ -1,0 +1,38 @@
+.centered-input {
+  /* text-align: center; */
+  font-size: 95% !important;
+  font-family: "Arimo", sans-serif;
+  padding-left: 10px !important;
+  color: rgba(10, 9, 9, 0.76);
+}
+
+.centered-placeholder {
+  /* text-align: center; */
+  font-size: 95% !important;
+  font-family: "Arimo", sans-serif;
+  padding-left: 10px !important;
+}
+
+.forRegister {
+  font-family: "Arimo", sans-serif !important;
+  font-weight: 500 !important;
+  margin-bottom: 4%;
+  margin-top: 3%;
+  font-size: 95% !important;
+}
+
+.forAddClient {
+  font-family: "Arimo" !important;
+  font-size: 100% !important;
+  font-weight: 400 !important;
+  padding: 0.7rem !important;
+  width: 100%;
+}
+
+.forAddProject {
+  font-family: "Arimo" !important;
+  font-size: 100% !important;
+  font-weight: 400 !important;
+  padding: 0.5rem !important;
+  width: 100%;
+}

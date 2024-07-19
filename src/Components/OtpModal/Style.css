@@ -1,0 +1,18 @@
+.parent-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resend-code {
+  text-decoration: none;
+  font-weight: bold;
+  color: #0cdaff;
+  cursor: pointer;
+}
+
+.button {
+  width: 100%;
+  border-radius: 10px;
+  border: 3px solid #0be9f2 !important;
+}

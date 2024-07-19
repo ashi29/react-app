@@ -1,0 +1,11 @@
+.multiselect-formControl {
+  width: 100%;
+}
+
+.forAddProject {
+  font-family: "Arimo" !important;
+  font-size: 100% !important;
+  font-weight: 400 !important;
+  padding: 0.5rem !important;
+  width: 100%;
+}

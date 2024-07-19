@@ -1,0 +1,21 @@
+.center-text {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-family: "Vollkorn", serif !important;
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+}
+
+.subtitle {
+  font-family: "Arimo", sans-serif !important;
+  font-size: 1.1rem !important;
+  padding-top: 1rem;
+}
+
+.centered-text-image {
+  /* height: 50%; */
+  width: 86%;
+}

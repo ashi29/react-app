@@ -1,0 +1,37 @@
+.infoText-1 {
+  font-family: "Arimo";
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #5b5b5b !important;
+}
+
+.infoText-2 {
+  font-family: "Arimo";
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding-top: 0.5rem;
+  color: #5b5b5b;
+}
+
+.infoText-3 {
+  padding-top: 0.5rem;
+  font-family: "Arimo";
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #b3b3b3;
+}
+
+.infoContainer {
+  min-height: 20vh;
+  border-radius: 10px;
+  border: 0.77px solid #e8e8e8;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  box-shadow: 0px 3.85px 8.47px 0px #0000000a, 0px 15.41px 15.41px 0px #0000000a,
+    0px 34.67px 20.8px 0px #00000005, 0px 61.63px 24.65px 0px #00000003,
+    0px 96.3px 26.96px 0px #00000000;
+}
+
+.image-section {
+  text-align: center;
+}

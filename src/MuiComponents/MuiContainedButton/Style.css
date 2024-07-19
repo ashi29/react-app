@@ -1,0 +1,129 @@
+.containedButton {
+  border-radius: 10px;
+  text-transform: none !important;
+
+  box-shadow: 4.55px 3.03px 4.4px 0px #1593aa38;
+  min-width: 27% !important;
+  border: 1px solid white;
+  background: linear-gradient(
+    90deg,
+    rgba(13, 219, 255, 0.77) 0%,
+    rgba(83, 89, 231, 0.77) 100%
+  );
+}
+
+.containedButton:disabled {
+  border-radius: 10px;
+  text-transform: none !important;
+
+  box-shadow: 4.55px 3.03px 4.4px 0px #1593aa38;
+  min-width: 27% !important;
+  border: 1px solid white;
+  background: linear-gradient(
+    90deg,
+    rgba(134, 167, 173, 0.77) 0%,
+    rgba(176, 178, 208, 0.77) 100%
+  );
+}
+.containedButton:disabled .buttonText {
+  font-family: "Arimo";
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 23.67px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.826) !important;
+}
+
+.containedButton .buttonText {
+  font-family: "Arimo";
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 23.67px;
+  text-align: center;
+}
+
+.containedButton:hover {
+  box-shadow: 4px 4px 9px 0px rgba(25, 118, 210, 0.4);
+}
+
+.buttonText {
+  text-decoration: bold;
+}
+
+.StepForm-next {
+  border-radius: 8px !important;
+  text-transform: none !important;
+  min-width: 100px !important;
+  box-shadow: 0px 5px 11px 0px #0000001a, 0px 19px 19px 0px #00000017,
+    0px 44px 26px 0px #0000000d, 0px 78px 31px 0px #00000003,
+    0px 122px 34px 0px #00000000 !important;
+  background: #25a442 !important;
+}
+
+.StepForm-previous {
+  border-radius: 8px !important;
+  text-transform: none !important;
+  min-width: 100px !important;
+  border: 3px solid #28a745 !important;
+  box-shadow: 0px 5px 11px 0px #0000001a, 0px 19px 19px 0px #00000017,
+    0px 44px 26px 0px #0000000d, 0px 78px 31px 0px #00000003,
+    0px 122px 34px 0px #00000000;
+}
+
+.StepForm-next .buttonText {
+  font-family: "Arimo";
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 23.67px;
+  text-align: center;
+}
+
+.StepForm-previous .buttonText {
+  font-family: "Arimo";
+  color: #28a745;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 23.67px;
+  text-align: center;
+}
+
+.green-success-button {
+  background: linear-gradient(179.38deg, #31bb51 49.47%, #0b6e22 151.93%);
+  box-shadow: 0px 2px 5px 0px #0000001a, 0px 8px 8px 0px #00000017,
+    0px 19px 11px 0px #0000000d, 0px 33px 13px 0px #00000003,
+    0px 52px 14px 0px #00000000;
+  margin-bottom: 0.5rem !important;
+}
+
+.red-error-button {
+  background: linear-gradient(179.38deg, #f54848 49.47%, #f10808 151.93%);
+  box-shadow: 0px 2px 5px 0px #0000001a, 0px 8px 8px 0px #00000017,
+    0px 19px 11px 0px #0000000d, 0px 33px 13px 0px #00000003,
+    0px 52px 14px 0px #00000000;
+  margin-bottom: 0.5rem !important;
+}
+
+.orange-waiting-button {
+  background: linear-gradient(179.38deg, #ff8516 49.47%, #c15e03 151.93%);
+  box-shadow: 0px 2px 5px 0px #0000001a, 0px 8px 8px 0px #00000017,
+    0px 19px 11px 0px #0000000d, 0px 33px 13px 0px #00000003,
+    0px 52px 14px 0px #00000000;
+  margin-bottom: 0.5rem !important;
+}
+
+.profile-save-button {
+  border-radius: 8px;
+  background: #7fa688 !important;
+  box-shadow: 0px 2px 3px 0px #0000001a, 0px 6px 6px 0px #00000014,
+    0px 14px 8px 0px #0000000d, 0px 24px 10px 0px #00000003,
+    0px 38px 11px 0px #00000000;
+}
+
+.profile-save-button .buttonText {
+  font-family: "Arimo";
+  font-size: 105%;
+  font-weight: 700;
+  line-height: 20.71px;
+  text-align: center;
+  color: black;
+}

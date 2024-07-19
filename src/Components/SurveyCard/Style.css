@@ -1,0 +1,53 @@
+.title-section {
+  height: 50%;
+}
+
+.survey-card-1 {
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100%;
+  max-width: 58vh;
+  padding: 2rem;
+  margin: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.survey-card-2 {
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100%;
+  max-width: 58vh;
+  padding: 2rem;
+  margin: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.survey-card-1:hover,
+.survey-card-2:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.read-more-btn {
+  text-transform: none;
+  transition: color 0.3s;
+}
+
+.survey-card:hover .read-more-btn {
+  color: white;
+}
+
+.survey-card:hover .icon {
+  color: transparent;
+  border: 2px solid currentColor;
+}
+
+.title1-text {
+  font-family: "Vollkorn", serif !important;
+  font-size: 4.5vh !important;
+  font-weight: 600 !important;
+  color: rgba(83, 89, 231, 0.77);
+}
+
+.title2-text {
+  font-family: "Vollkorn", serif !important;
+  font-size: 3vh !important;
+  font-weight: 500 !important;
+  color: rgba(83, 89, 231, 0.77);
+}

@@ -1,0 +1,160 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e1f9fe;
+  box-shadow: 4px 10px 14.5px 0px #6fdbf529;
+  padding: 3% !important;
+}
+
+.container {
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0ddbff 0%, #2c84f5 70.5%, #4344ed 100%);
+  box-shadow: 4px 10px 14.5px 0px #6fdbf529;
+}
+
+.image-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: none;
+}
+
+.image {
+  width: 70% !important;
+  border-radius: 50%;
+  background-color: #0cdaff;
+  box-shadow: 5.77px 7.42px 8.74px 0px #13697978;
+}
+
+.arimo-input-label {
+  font-family: "Arimo", sans-serif !important;
+  margin-top: 5.5%;
+  margin-bottom: 3.5%;
+  font-weight: 550;
+  font-size: 97% !important;
+}
+
+.vollkorn-hello {
+  font-family: "Vollkorn", serif !important;
+  font-size: 200% !important;
+  font-weight: 400 !important;
+  /* line-height: 2rem !important; */
+  text-align: center !important;
+  color: white;
+
+  background-color: transparent;
+}
+.vollkorn-scrutiny {
+  font-family: "Vollkorn", serif !important;
+  font-size: 250% !important;
+  font-weight: 700 !important;
+  /* line-height: 3rem !important; */
+  text-align: center !important;
+  color: white;
+}
+
+.vollkorn-body {
+  font-family: "Vollkorn", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 115%;
+  text-align: center;
+  color: white;
+  margin-bottom: 1.5rem !important;
+  /* text-justify: inter-word; */
+}
+
+/* form section */
+
+.vollkorn-Login {
+  font-family: "Vollkorn", serif !important;
+  font-weight: 700 !important;
+  font-style: normal;
+  font-size: 4vh !important;
+  text-align: center;
+  padding-top: 1.7rem;
+}
+
+.logo-image {
+  width: 8vh !important;
+  position: absolute;
+  right: 1.2vh;
+  top: 1.2vh;
+}
+
+.card-form-container {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 10% !important;
+  border-bottom-left-radius: 10% !important;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-form {
+  height: 100%;
+  overflow: auto;
+}
+
+.cardAction-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: #0cdaff;
+  cursor: pointer;
+}
+
+.cardAction-container {
+  font-size: 90% !important;
+}
+
+.helperText {
+  cursor: pointer;
+  font-weight: 200;
+  font-size: 90% !important;
+  margin-bottom: 6% !important;
+  margin-top: 3% !important;
+  text-decoration: none !important;
+}
+
+.goBackHome {
+  margin-top: 1.2rem;
+  font-family: "Arimo";
+  font-size: 100%;
+  font-weight: 700;
+  text-align: center;
+  color: #7885ee !important;
+  text-decoration: none !important;
+}
+
+.flex-and-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.waitingScreen-title {
+  font-family: "Arimo";
+  font-weight: 600 !important;
+  text-align: center;
+  color: black;
+}
+
+.waitingScreen-text {
+  font-family: "Arimo";
+  font-size: 20px !important;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  text-align: center;
+  color: #00000080;
+}
+
+.waitingScreen-image {
+  width: 660.91px;
+  height: 380px;
+}

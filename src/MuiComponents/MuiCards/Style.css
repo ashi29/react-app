@@ -1,0 +1,86 @@
+.cardImage {
+  max-width: 85%;
+  height: 100%;
+  margin: auto;
+  transition: transform 0.3s ease-in-out;
+  /* border: 1px solid rgba(43, 43, 43, 0.491); */
+  box-shadow: 0 2px 12px 1px rgba(0, 0, 0, 0.1);
+}
+
+.cardImage:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 12px 1px rgba(0, 0, 0, 0.2);
+}
+
+.box {
+  overflow: hidden;
+}
+
+.box:hover img {
+  transform: scale(0.95);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cardImage-media {
+  width: 100%;
+  object-fit: cover;
+}
+
+.cardImage-heading {
+  font-family: "Vollkorn", serif !important;
+  font-weight: 200;
+  font-size: 3vh !important;
+  text-align: center;
+  color: rgba(83, 89, 231, 0.77);
+}
+
+.cardImage-text {
+  text-align: center;
+}
+
+.iconCard-title {
+  font-family: "Volkorn", serif !important;
+  font-weight: 700 !important;
+  font-size: 2rem !important;
+  line-height: 1.5;
+  color: rgb(28 33 139 / 77%);
+}
+
+.iconCard-subtitle {
+  font-family: "Volkorn", serif !important;
+  font-weight: 500 !important;
+  font-size: 1.2rem !important;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+/* checkboxWithText*/
+.checkBoxWithText-container {
+  display: flex;
+  align-items: center;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2%;
+  margin: 2%;
+  transition: background-color 0.3s ease;
+}
+
+.checkBoxWithText-container:hover {
+  background-color: rgb(221, 232, 232);
+}
+
+.checkBox-text {
+  font-family: "Arimo", sans-serif !important;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.5;
+}
+
+.icon-container {
+  position: relative;
+  height: 7vh;
+  align-content: center;
+}
+
+/* .icon-hover-secondary {
+  color: #f50057;
+}   */
