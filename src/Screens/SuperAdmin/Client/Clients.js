@@ -197,7 +197,7 @@ const Clients = () => {
 
   function getClientData() {
     fetch(
-      "http://localhost:8080/ScrutinyGlobal/getListAsAccountType?accountType=client",
+      "http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getListAsAccountType?accountType=client",
       {
         method: "GET",
         headers: {

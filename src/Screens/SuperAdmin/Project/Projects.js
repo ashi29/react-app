@@ -185,7 +185,7 @@ const Projects = () => {
   }, []);
 
   function getSurveyLinkData() {
-    fetch("http://localhost:8080/ScrutinyGlobal/getSurveyDetails", {
+    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getSurveyDetails", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -205,7 +205,7 @@ const Projects = () => {
   }
 
   function getProjectData() {
-    fetch("http://localhost:8080/ScrutinyGlobal/getProjectList", {
+    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getProjectList", {
       method: "GET",
       headers: {
         Accept: "application/json",

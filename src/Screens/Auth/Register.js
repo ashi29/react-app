@@ -102,7 +102,7 @@ const Register = () => {
     setShow(true);
     console.log("submit");
     console.log("otp data :- ", otpVerificationData);
-    fetch("http://localhost:8080/ScrutinyGlobal/otpsend", {
+    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/otpsend", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -123,7 +123,7 @@ const Register = () => {
   const handleModalButtonClick = () => {
     setShow2(true);
     const userData = formData;
-    fetch("http://localhost:8080/ScrutinyGlobal/saveRegisterUser", {
+    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/saveRegisterUser", {
       // mode: 'no-cors',
       method: "POST",
       headers: {

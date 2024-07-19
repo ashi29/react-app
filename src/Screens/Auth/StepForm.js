@@ -53,7 +53,7 @@ const StepForm = ({
 
   const [countriesData, setCountriesData] = useState([""]);
   useEffect(() => {
-    fetch("http://localhost:8080/ScrutinyGlobal/getCountries", {
+    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getCountries", {
       method: "GET",
       headers: {
         Accept: "application/json",

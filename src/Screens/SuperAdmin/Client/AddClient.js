@@ -77,7 +77,7 @@ const AddClient = () => {
   const [clientUserName, setClientUserName] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/ScrutinyGlobal/getUserList", {
+    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getUserList", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -291,7 +291,7 @@ const AddClient = () => {
 
     
 
-    fetch("http://localhost:8080/ScrutinyGlobal/setroletouser", {
+    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/setroletouser", {
       method: "PUT",
       headers: {
         Accept: "application/json",
