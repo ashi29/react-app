@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, useMediaQuery, useTheme } from "@mui/material";
 import StepForm from "../../../Components/StepForm/Index";
 import { MuiTextField } from "../../../MuiComponents/MuiTextField/Index";
 import { MuiDropDown } from "../../../MuiComponents/MuiDropDown/Index";
@@ -9,6 +9,7 @@ import CrossFrame from "../../../Images/ModalImages/CrossFrame.png";
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
 import SuccessErrorModal from "../../../Components/SuccesErrorModal/Index";
+import { API_PREFIX } from "../../../config";
 
 const AddClient = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const AddClient = () => {
   const [accountType, setAccountType] = useState("");
   const [industry, setIndustry] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showErrorModal, setShowErrorModal] = useState(false);
+  // const [showErrorModal, setShowErrorModal] = useState(false);
 
   const onChangeCountry = (e) => {
     setCountry(e.target.value);
@@ -77,7 +78,7 @@ const AddClient = () => {
   const [clientUserName, setClientUserName] = useState([]);
 
   useEffect(() => {
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getUserList", {
+    fetch(`${API_PREFIX}getUserList`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -92,14 +93,14 @@ const AddClient = () => {
         return res.json();
       })
       .then(function (data) {
-        console.log("data of client : ", data);
+        // console.log("data of client : ", data);
         setClientData(data);
         setClientUserName(
           data.map((element) => {
             return element.name;
           })
         );
-        console.log("client data seting ", clientData);
+        // console.log("client data seting ", clientData);
       });
   }, []);
 
@@ -122,28 +123,27 @@ const AddClient = () => {
     }
   };
 
-  const clientFormData = 
-    {
-      "userId": userId,
-      "accountType": "client",
-      "successURL": "",
-      "terminateURL": "",
-      "quotaFullURL": "",
-      "securityTerminateURL": "",
-      "contactName": contactName,
-      "contactEmail": email,
-      "alternateNumber": alternateContactNumber,
-      "website": websiteLink,
-      "industry": industry,
-      "description": "",
-    };
+  const clientFormData = {
+    userId: userId,
+    accountType: "client",
+    successURL: "",
+    terminateURL: "",
+    quotaFullURL: "",
+    securityTerminateURL: "",
+    contactName: contactName,
+    contactEmail: email,
+    alternateNumber: alternateContactNumber,
+    website: websiteLink,
+    industry: industry,
+    description: "",
+  };
   //setClientFormData
   // console.log('object :>> ', object);
-  console.log("client data seting outside", clientUserName);
+  // console.log("client data seting outside", clientUserName);
 
   const steps = [
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiDropDown
           required={true}
           value={clientData.name}
@@ -154,9 +154,9 @@ const AddClient = () => {
           className="forAddClient"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               required={true}
@@ -167,7 +167,7 @@ const AddClient = () => {
               className="forAddClient"
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               value={alternateContactName}
@@ -179,9 +179,9 @@ const AddClient = () => {
           </Grid>
         </Grid>
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               required={true}
@@ -192,7 +192,7 @@ const AddClient = () => {
               className="forAddClient"
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               value={alternateContactNumber}
@@ -206,7 +206,7 @@ const AddClient = () => {
       </Grid>,
     ],
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={email}
@@ -216,7 +216,7 @@ const AddClient = () => {
           className="forAddClient"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={websiteLink}
@@ -226,7 +226,7 @@ const AddClient = () => {
           className="forAddClient"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiDropDown
           value={status}
           //   defaultValue={reduxData?.accountType || ""}
@@ -238,7 +238,7 @@ const AddClient = () => {
       </Grid>,
     ],
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={address}
@@ -248,9 +248,9 @@ const AddClient = () => {
           className="forAddClient"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               required={true}
@@ -261,7 +261,7 @@ const AddClient = () => {
               className="forAddClient"
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               value={currency}
@@ -273,13 +273,14 @@ const AddClient = () => {
           </Grid>
         </Grid>
       </Grid>,
-      <Grid item>
-        <MuiDropDown
+      <Grid item xs={12}>
+        <MuiTextField
+          type="text"
           value={industry}
           required={true}
           //   defaultValue={reduxData?.accountType || ""}
           onChange={onChangeIndustry}
-          options={["industry 1", "industry 2", "industry 3"]}
+          // options={["industry 1", "industry 2", "industry 3"]}
           label="Industry"
           className="forAddClient"
         />
@@ -288,10 +289,7 @@ const AddClient = () => {
   ];
 
   const handleSave = (formData) => {
-
-    
-
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/setroletouser", {
+    fetch(`${API_PREFIX}setroletouser`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -310,23 +308,30 @@ const AddClient = () => {
     navigate("/clients");
   };
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const content = (
     <Grid container alignItems="center" justifyContent="center">
       <Grid
         item
         container
+        xs={12}
         md={7}
         className="form-grid"
         justifyContent="center"
         alignItems="center"
       >
         <Grid item className="heading-grid">
-          <Paper elevation={0} className="screenHeading">
+          <Paper
+            elevation={0}
+            className={isMobile ? "screenHeading-mobile" : "screenHeading"}
+          >
             Add a New Client
           </Paper>
         </Grid>
         <Grid item>
-          <Paper elevation={6} className="form-sub-grid">
+          <Paper elevation={isMobile ? 0 : 6} className="form-sub-grid">
             <StepForm
               steps={steps}
               onSave={handleSave}
@@ -346,7 +351,7 @@ const AddClient = () => {
             handleModalButtonClick={handleGoToClientList}
           />
           <SuccessErrorModal
-            show={showErrorModal}
+            // show={showErrorModal}
             handleClose={handleClose}
             imageSrc={CrossFrame}
             clientName={clientName}

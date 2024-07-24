@@ -1,4 +1,11 @@
-import { Button, Grid, Paper, Switch } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Paper,
+  Switch,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSelectedRows } from "../../../Store/Slice/rowSelectionSlice";
@@ -8,6 +15,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import MuiDataGrid from "../../../MuiComponents/MuiDataGrid/Index";
 import { useNavigate } from "react-router-dom";
+import { API_PREFIX } from "../../../config";
 
 const Clients = () => {
   const dispatch = useDispatch();
@@ -18,10 +26,11 @@ const Clients = () => {
   const handleAddProject = () => {
     navigate("/add-project");
   };
-  const [columns, setColumns] = useState([
+  const columns = [
     {
       field: "id",
       headerName: "",
+      editable: false,
       headerClassName: "dataGrid-header",
     },
     {
@@ -29,7 +38,6 @@ const Clients = () => {
       headerName: "Status",
       width: 150,
       headerAlign: "center",
-      editable: true,
       align: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -37,7 +45,7 @@ const Clients = () => {
         return (
           <Switch
             // checked
-            defaultChecked={params?.value === "Yes"}
+            defaultChecked
             color="success"
           />
         );
@@ -49,6 +57,7 @@ const Clients = () => {
       align: "center",
       type: "text",
       width: 190,
+      editable: false,
       headerAlign: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -57,6 +66,7 @@ const Clients = () => {
       field: "contactName",
       headerName: "Contact Name",
       width: 170,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -67,6 +77,7 @@ const Clients = () => {
       headerName: "Contact Number",
       sortable: false,
       width: 170,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -77,6 +88,7 @@ const Clients = () => {
       headerName: "Email",
       sortable: false,
       width: 190,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -87,6 +99,7 @@ const Clients = () => {
       headerName: "Website Link",
       sortable: false,
       width: 170,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -97,6 +110,7 @@ const Clients = () => {
       headerName: "Address",
       sortable: false,
       width: 170,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -107,6 +121,7 @@ const Clients = () => {
       headerName: "Country",
       sortable: false,
       width: 160,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -118,6 +133,7 @@ const Clients = () => {
       align: "center",
       sortable: false,
       width: 160,
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       headerAlign: "center",
@@ -126,46 +142,18 @@ const Clients = () => {
       field: "industry",
       headerName: "Industry",
       align: "center",
+      editable: false,
       sortable: false,
       width: 170,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       headerAlign: "center",
     },
-  ]);
+  ];
 
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({
     id: false,
   });
-
-  const rows = [
-    {
-      id: 1,
-      status: "Yes",
-      clientName: "clientName",
-      contactName: "contactName",
-      contactNumber: "123456789",
-      email: "daniel@gmail.com",
-      websiteLink: "exampleLink.com",
-      address: "street 20",
-      country: "india",
-      currency: "INR",
-      industry: "HealthCare",
-    },
-    {
-      id: 2,
-      status: "No",
-      clientName: "clientName",
-      contactName: "contactName",
-      contactNumber: "123456789",
-      email: "daniel@gmail.com",
-      websiteLink: "exampleLink.com",
-      address: "street 20",
-      country: "india",
-      currency: "INR",
-      industry: "HealthCare",
-    },
-  ];
 
   const [responseData, setResponseData] = useState([]);
   const [userDataNew, setUserDataNew] = useState([]);
@@ -196,22 +184,19 @@ const Clients = () => {
   }, []);
 
   function getClientData() {
-    fetch(
-      "http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getListAsAccountType?accountType=client",
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(`${API_PREFIX}getListAsAccountType?accountType=client`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
         setResponseData(data);
-        console.log("response Data", data);
+        // console.log("response Data", data);
       })
       .catch(function (error) {
         console.error("Error fetching data:", error);
@@ -222,7 +207,7 @@ const Clients = () => {
     setUserDataNew(convertData(responseData));
   }, [responseData]);
   function convertData(data) {
-    console.log(data);
+    // console.log(data);
     data.map((element) => userData.id.push(element.user_id));
     data.map((element) => userData.clientName.push(element.name));
     data.map((element) => userData.websiteLink.push(element.website));
@@ -240,7 +225,7 @@ const Clients = () => {
     data.map((element) => userData.salary.push(element.monthlySalary));
     data.map((element) => userData.state.push(element.state));
     data.map((element) => userData.zipCode.push(element.zipcode));
-    console.log("userData", userData);
+    // console.log("userData", userData);
 
     let userDataConverted = [];
     const keys = Object.keys(userData);
@@ -252,7 +237,7 @@ const Clients = () => {
       });
       userDataConverted = [...userDataConverted, newObj];
     }
-    console.log("userDataNew", userDataConverted);
+    // console.log("userDataNew", userDataConverted);
     return userDataConverted;
   }
 
@@ -268,14 +253,17 @@ const Clients = () => {
     dispatch(setSelectedRows(selectedRowData));
   };
 
-  console.log("Selected Rows:", checkedRows);
+  // console.log("Selected Rows:", checkedRows);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const content = (
     <Grid container>
       <Grid
         item
         container
-        className="heading-grid2"
+        className={"heading-grid2"}
         justifyContent="space-between"
         alignItems="end"
       >

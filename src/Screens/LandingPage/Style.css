@@ -11,6 +11,13 @@
   width: 4% !important;
   height: 4% !important;
 }
+
+.navbar-logo-mobile {
+  padding-top: 1%;
+  margin-right: 0.5%;
+  width: 11% !important;
+  height: 11% !important;
+}
 .navButtons {
   font-family: "Arimo", sans-serif !important;
   font-weight: 400;
@@ -57,11 +64,14 @@
 .home-sub-grid {
   height: 55vh;
 }
+.home-sub-grid-mobile {
+  height: 99vh;
+}
 .iconCardGrid {
-  height: 15vh;
+  height: auto;
   margin-top: 4% !important;
   background-color: #ebfdff;
-  /* padding: 2%; */
+  padding: 1%;
 }
 
 .main-container-landing {
@@ -103,15 +113,16 @@
 }
 
 .contact-us-grid {
-  height: 100%;
-  padding: 2rem;
+  /* height: 100%; */
+  margin-top: 7% !important;
+  margin-bottom: 5% !important;
 }
 
 .contact-us {
   font-family: "Vollkorn", serif !important;
   font-weight: 600 !important;
   font-size: 2rem !important;
-  text-align: center;
+  text-align: center !important;
 }
 .aboutSection1 {
   /* background-color: #def3f5; */
@@ -156,19 +167,24 @@
 }
 
 .aboutSection2 {
-  height: 70vh;
+  height: 100%;
+  margin-bottom: 8% !important;
 }
 
 .aboutImage2 {
   width: 100%;
-  /* display: ;
-  justify-content: center; */
+}
+
+.aboutImage3 {
+  width: 90%;
+}
+
+.provide-height {
+  height: 100% !important;
 }
 
 .aboutSection3 {
   height: 100%;
-  padding-bottom: 5%;
-  padding-top: 5%;
 }
 
 .aboutSection3-heading {

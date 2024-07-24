@@ -1,6 +1,11 @@
 .center-text {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 6% !important;
+  margin-bottom: 6% !important;
+}
+
+.center-text-mobile {
+  margin-top: 12% !important;
+  margin-bottom: 10% !important;
 }
 
 .title {
@@ -17,5 +22,7 @@
 
 .centered-text-image {
   /* height: 50%; */
-  width: 86%;
+  width: 98%;
+  display: flex;
+  margin: auto;
 }

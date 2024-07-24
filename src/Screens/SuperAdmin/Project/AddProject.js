@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Grid, IconButton, Paper, TextField } from "@mui/material";
+import {
+  Grid,
+  IconButton,
+  Paper,
+  TextField,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import StepForm from "../../../Components/StepForm/Index";
 import { MuiTextField } from "../../../MuiComponents/MuiTextField/Index";
 import { MuiDropDown } from "../../../MuiComponents/MuiDropDown/Index";
@@ -17,6 +24,7 @@ import { selectAddProjectStep } from "../../../Store/Slice/stepSlice";
 import SuccessErrorModal from "../../../Components/SuccesErrorModal/Index";
 import { selectedRow } from "../../../Store/Slice/rowSelectionSlice";
 import MuiMultiSelectDropdown from "../../../MuiComponents/MuiMultiSelectDropdown/Index";
+import { API_PREFIX } from "../../../config";
 // import EditIcon from "@mui/icons-material/Edit";
 
 const AddProject = () => {
@@ -43,9 +51,12 @@ const AddProject = () => {
   const [selectedCountries, setSelectedCountries] = useState(
     clientData[0]?.country ? [clientData[0].country] : []
   );
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [selectedRowIds, setSelectedRowIds] = useState([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showErrorModal, setShowErrorModal] = useState(false);
+  // const [showErrorModal, setShowErrorModal] = useState(false);
   // console.log("edit :>> ", edit);
 
   // const handleEdit = () => {
@@ -109,7 +120,6 @@ const AddProject = () => {
 
   const onChangeDocument = (event) => {
     const file = event.target.files[0];
-    console.log("file :>> ", file);
     setDocument(file);
   };
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({
@@ -122,11 +132,12 @@ const AddProject = () => {
     );
   };
 
-  const [columns, setColumns] = useState([
-    { field: "id", headerClassName: "add-project-header" },
+  const columns = [
+    { field: "id", editable: false, headerClassName: "add-project-header" },
     {
       field: "country",
       headerName: "Country",
+      editable: false,
       cellClassName: "dataGrid-cell",
       width: 100,
       align: "center",
@@ -137,6 +148,7 @@ const AddProject = () => {
       field: "IR",
       headerName: "IR%",
       width: 70,
+      editable: false,
       align: "center",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -158,6 +170,7 @@ const AddProject = () => {
       type: "number",
       width: 80,
       align: "center",
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
       headerClassName: "add-project-header",
@@ -177,6 +190,7 @@ const AddProject = () => {
       headerName: "Completes needed",
       width: 150,
       align: "center",
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
       headerClassName: "add-project-header",
@@ -196,6 +210,7 @@ const AddProject = () => {
       headerName: "Completes Feasable",
       width: 150,
       align: "center",
+      editable: false,
       headerAlign: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "add-project-header",
@@ -214,6 +229,7 @@ const AddProject = () => {
       field: "costPerSurvey",
       headerName: "Cost/Survey",
       width: 120,
+      editable: false,
       headerAlign: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "add-project-header",
@@ -232,6 +248,7 @@ const AddProject = () => {
       field: "surveyLink",
       headerName: "Survey Link",
       width: 150,
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
       headerClassName: "add-project-header",
@@ -246,7 +263,7 @@ const AddProject = () => {
         />
       ),
     },
-  ]);
+  ];
 
   const [rows, setRows] = useState(
     selectedCountries.map((country, index) => ({
@@ -262,7 +279,7 @@ const AddProject = () => {
   );
 
   useEffect(() => {
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getCountries", {
+    fetch(`${API_PREFIX}getCountries`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -301,11 +318,10 @@ const AddProject = () => {
     setRows(newRows);
     setSelectedRowIds([]);
   };
-  console.log("selectedRowIds :>> ", selectedRowIds);
 
   const steps = [
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={projectName}
@@ -315,7 +331,7 @@ const AddProject = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={clientName}
@@ -325,9 +341,9 @@ const AddProject = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2} justifyContent="space-between">
-          <Grid item md={5}>
+          <Grid item xs={12} md={5}>
             <MuiTextField
               type="text"
               value={contactNumber}
@@ -337,7 +353,7 @@ const AddProject = () => {
               className="forAddProject"
             />
           </Grid>
-          <Grid item md={5}>
+          <Grid item xs={12} md={5}>
             <MuiTextField
               type="text"
               value={alternateContactNumber}
@@ -351,9 +367,9 @@ const AddProject = () => {
       </Grid>,
     ],
     [
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2} justifyContent="space-between">
-          <Grid item md={5}>
+          <Grid item xs={12} md={5}>
             <MuiTextField
               type="date"
               value={startDate}
@@ -364,7 +380,7 @@ const AddProject = () => {
               className="forAddProject"
             />
           </Grid>
-          <Grid item md={5}>
+          <Grid item xs={12} md={5}>
             <MuiTextField
               type="date"
               value={endDate}
@@ -378,7 +394,7 @@ const AddProject = () => {
         </Grid>
       </Grid>,
 
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={projectHead}
@@ -387,7 +403,7 @@ const AddProject = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={spoc}
@@ -399,7 +415,7 @@ const AddProject = () => {
       </Grid>,
     ],
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiDropDown
           value={audienceType}
           //   defaultValue={reduxData?.accountType || ""}
@@ -410,7 +426,7 @@ const AddProject = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={projectBudget}
@@ -420,7 +436,7 @@ const AddProject = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={description}
@@ -431,7 +447,7 @@ const AddProject = () => {
       </Grid>,
     ],
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiDropDown
           value={billingCurrency}
           //   defaultValue={reduxData?.accountType || ""}
@@ -442,7 +458,7 @@ const AddProject = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiMultiSelectDropdown
           label={"Country"}
           placeholder={"(Select more countries)"}
@@ -452,7 +468,7 @@ const AddProject = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="file"
           value={document}
@@ -466,7 +482,7 @@ const AddProject = () => {
     [
       <Grid container justifyContent="center" alignItems="center" spacing={2}>
         <Grid item container alignItems="center" xs={12}>
-          <Grid item md={10}>
+          <Grid item xs={8} md={10}>
             <Paper elevation={0} className="datagrid-label">
               Based on your country selection:
             </Paper>
@@ -475,6 +491,7 @@ const AddProject = () => {
             item
             container
             md={2}
+            xs={4}
             justifyContent="flex-end"
             alignItems="center"
           >
@@ -490,7 +507,7 @@ const AddProject = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item className="add-client-datagrid">
+        <Grid item xs={12} className="add-client-datagrid">
           <MuiDataGrid
             rows={rows}
             columns={columns}
@@ -498,7 +515,6 @@ const AddProject = () => {
             disablePagination={true}
             columnVisibilityModel={columnVisibilityModel}
             onRowSelectionModelChange={(newSelection) => {
-              console.log("Hi");
               setSelectedRowIds(newSelection);
             }}
           />
@@ -510,7 +526,7 @@ const AddProject = () => {
   const handleSave = (formData) => {
     // Save form data
     setShowSuccessModal(!showSuccessModal);
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
   };
 
   const handleClose = () => {
@@ -526,23 +542,30 @@ const AddProject = () => {
       <Grid
         item
         container
+        xs={12}
         md={7}
         className="form-grid"
         justifyContent="center"
         alignItems="center"
       >
         <Grid item className="heading-grid">
-          <Paper elevation={0} className="screenHeading">
+          <Paper
+            elevation={0}
+            className={isMobile ? "screenHeading-mobile" : "screenHeading"}
+          >
             Add Project
           </Paper>
         </Grid>
         <Grid item container className="content-grid">
-          <Grid item className="fixed-heading">
+          <Grid
+            item
+            className={isMobile ? "fixed-heading-mobile" : "fixed-heading"}
+          >
             {currentStep > 2
               ? "Sampling Requirements"
               : "Project Specifications"}
           </Grid>
-          <Paper elevation={2} className="form-sub-grid">
+          <Paper elevation={isMobile ? 0 : 2} className="form-sub-grid">
             <StepForm
               steps={steps}
               onSave={handleSave}
@@ -563,7 +586,7 @@ const AddProject = () => {
           handleModalButtonClick={handleGoToProjectList}
         />
         <SuccessErrorModal
-          show={showErrorModal}
+          // show={showErrorModal}
           handleClose={handleClose}
           imageSrc={CrossFrame}
           clientName={projectName}

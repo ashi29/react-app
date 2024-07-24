@@ -4,11 +4,11 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import { useNavigate } from "react-router-dom";
 import MuiDataGrid from "../../../MuiComponents/MuiDataGrid/Index";
-import { Button, Grid, Paper } from "@mui/material";
+import { Button, Grid, Paper, useMediaQuery, useTheme } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import { useDispatch } from "react-redux";
 import { setSelectedRows } from "../../../Store/Slice/rowSelectionSlice";
-import { rowsMetaStateInitializer } from "@mui/x-data-grid/internals";
+import { API_PREFIX } from "../../../config";
 
 const Projects = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,8 @@ const Projects = () => {
   const [responseData, setResponseData] = useState([]);
   const [surveyResponseData, setSurveyResponseData] = useState([]);
   const [projectDetailsData, setProjectDetailsData] = useState([]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   let projectData = {
     id: [],
@@ -37,12 +39,13 @@ const Projects = () => {
     LOI: [],
   };
 
-  const [columns, setColumns] = useState([
+  const columns = [
     {
       field: "id",
       headerName: "S.No.",
       width: 90,
       align: "center",
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
     },
@@ -50,11 +53,16 @@ const Projects = () => {
       field: "status",
       headerName: "Status",
       width: 130,
+      editable: false,
       headerAlign: "center",
-      editable: true,
+      // align: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
+      type: "singleSelect",
+      valueOptions: ["Initiated", "Running", "Completed", "Cancelled"],
       renderCell: (params) => {
+        const status = params.value || "Initiated";
+
         const getColor = (status) => {
           switch (status) {
             case "Completed":
@@ -70,11 +78,12 @@ const Projects = () => {
           }
         };
         return (
-          <>
-            <CircleIcon fontSize="small" color={getColor(params.value)} />
-
-            <Paper elevation={0}>{params.value}</Paper>
-          </>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <CircleIcon fontSize="small" color={getColor(status)} />
+            <Paper elevation={0} style={{ marginLeft: 8 }}>
+              {status}
+            </Paper>
+          </div>
         );
       },
     },
@@ -83,6 +92,7 @@ const Projects = () => {
       headerName: "Project Name",
       align: "center",
       width: 180,
+      editable: false,
       headerAlign: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -92,6 +102,7 @@ const Projects = () => {
       headerName: "Client Name",
       width: 180,
       align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -101,6 +112,7 @@ const Projects = () => {
       headerName: "Project Head",
       width: 180,
       align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -110,6 +122,7 @@ const Projects = () => {
       headerName: "Audience Type",
       width: 170,
       align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -119,6 +132,7 @@ const Projects = () => {
       headerName: "Country",
       width: 160,
       align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -128,6 +142,7 @@ const Projects = () => {
       headerName: "Billing Currency",
       width: 170,
       align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -135,6 +150,7 @@ const Projects = () => {
     {
       field: "contactName",
       align: "center",
+      editable: false,
       headerName: "Contact Name",
       width: 160,
       cellClassName: "dataGrid-cell",
@@ -145,6 +161,7 @@ const Projects = () => {
       field: "startDate",
       headerName: "Start Date",
       align: "center",
+      editable: false,
       width: 170,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -154,6 +171,7 @@ const Projects = () => {
       field: "endDate",
       headerName: "End Date",
       align: "center",
+      editable: false,
       width: 170,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -163,6 +181,7 @@ const Projects = () => {
       field: "projectBudget",
       headerName: "Project Budget",
       align: "center",
+      editable: false,
       width: 170,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -170,6 +189,7 @@ const Projects = () => {
     },
     {
       field: "SPOC",
+      editable: false,
       headerName: "Pre Sales SPOC",
       width: 170,
       cellClassName: "dataGrid-cell",
@@ -177,7 +197,7 @@ const Projects = () => {
       headerAlign: "center",
       align: "center",
     },
-  ]);
+  ];
 
   useEffect(() => {
     getProjectData();
@@ -185,7 +205,7 @@ const Projects = () => {
   }, []);
 
   function getSurveyLinkData() {
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getSurveyDetails", {
+    fetch(`${API_PREFIX}getSurveyDetails`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -197,7 +217,7 @@ const Projects = () => {
       })
       .then(function (data) {
         setSurveyResponseData(data);
-        console.log("response Data", data);
+        // console.log("response Data", data);
       })
       .catch(function (error) {
         console.error("Error fetching data:", error);
@@ -205,7 +225,7 @@ const Projects = () => {
   }
 
   function getProjectData() {
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getProjectList", {
+    fetch(`${API_PREFIX}getProjectList`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -217,7 +237,7 @@ const Projects = () => {
       })
       .then(function (data) {
         setResponseData(data);
-        console.log("response Data", data);
+        // console.log("response Data", data);
       })
       .catch(function (error) {
         console.error("Error fetching data:", error);
@@ -225,7 +245,7 @@ const Projects = () => {
   }
 
   useEffect(() => {
-    console.log("responseData", responseData);
+    // console.log("responseData", responseData);
     setProjectDetailsData(convertData(responseData));
   }, [responseData]);
 
@@ -248,7 +268,7 @@ const Projects = () => {
       projectData.projectBudget.push(element.project_minimum_fee);
       projectData.SPOC.push(element.pre_salespoc);
     });
-    console.log(projectData);
+    // console.log(projectData);
 
     let projectDataConverted = [];
     const keys = Object.keys(projectData);
@@ -338,29 +358,30 @@ const Projects = () => {
     },
   ];
 
-  const handleRowClick = (params) => {
-    navigate(`/project/${checkedRows[0].id}`);
+  const handleRowClick = () => {
+    navigate(`/project/${checkedRows[0].project_id}`);
   };
+
   const handleRowSelection = (newRowSelectionModel) => {
     setRowSelectionModel(newRowSelectionModel);
     const selectedRowData = newRowSelectionModel.map((id) =>
-      rows.find((row) => row.id === id)
+      responseData.find((row) => row.project_id === id)
     );
     setCheckedRows(selectedRowData);
     dispatch(setSelectedRows(selectedRowData));
   };
 
   const handleAssignVendor = () => {
-    navigate(`/assignVendor/${checkedRows[0].id}`);
+    navigate(`/assignVendor/${checkedRows[0].project_id}`);
   };
-  console.log("Selected Rows:", checkedRows);
+  // console.log("Selected Rows:", checkedRows);
 
   const content = (
     <Grid container>
       <Grid
         item
         container
-        className="heading-grid2"
+        className={"heading-grid2"}
         justifyContent="space-between"
         alignItems="end"
       >
@@ -369,7 +390,14 @@ const Projects = () => {
             PROJECT LIST
           </Paper>
         </Grid>
-        <Grid item container justifyContent="flex-end" spacing={2} md={7}>
+        <Grid
+          item
+          container
+          justifyContent="flex-end"
+          spacing={2}
+          xs={12}
+          md={7}
+        >
           <Grid item>
             <Button
               variant="outlined"

@@ -8,6 +8,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import MuiDataGrid from "../../../MuiComponents/MuiDataGrid/Index";
 import { useNavigate } from "react-router-dom";
+import { API_PREFIX } from "../../../config";
 
 const Clients = () => {
   const dispatch = useDispatch();
@@ -39,10 +40,11 @@ const Clients = () => {
     industry: [],
   };
 
-  const [columns, setColumns] = useState([
+  const columns = [
     {
       field: "id",
       headerName: "",
+      editable: false,
       headerClassName: "dataGrid-header",
     },
     {
@@ -62,6 +64,7 @@ const Clients = () => {
     },
     {
       field: "vendorName",
+      editable: false,
       headerName: "Vendor Name",
       align: "center",
       type: "text",
@@ -74,6 +77,7 @@ const Clients = () => {
       field: "email",
       headerName: "Email",
       sortable: false,
+      editable: false,
       width: 200,
       align: "center",
       headerClassName: "dataGrid-header",
@@ -82,6 +86,7 @@ const Clients = () => {
     },
     {
       field: "contactNumber",
+      editable: false,
       headerName: "Contact Number",
       sortable: false,
       width: 190,
@@ -92,6 +97,7 @@ const Clients = () => {
     },
     {
       field: "altContactNumber",
+      editable: false,
       headerName: "Alt. Contact Number",
       width: 210,
       align: "center",
@@ -101,6 +107,7 @@ const Clients = () => {
     },
     {
       field: "address",
+      editable: false,
       headerName: "Address",
       sortable: false,
       width: 170,
@@ -112,6 +119,7 @@ const Clients = () => {
     {
       field: "city",
       headerName: "City",
+      editable: false,
       align: "center",
       sortable: false,
       width: 160,
@@ -121,6 +129,7 @@ const Clients = () => {
     },
     {
       field: "pincode",
+      editable: false,
       headerName: "Pincode",
       sortable: false,
       width: 160,
@@ -129,7 +138,7 @@ const Clients = () => {
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
     },
-  ]);
+  ];
 
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({
     id: false,
@@ -140,22 +149,19 @@ const Clients = () => {
   }, []);
 
   function getClientData() {
-    fetch(
-      "http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getListAsAccountType?accountType=vendor",
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(`${API_PREFIX}getListAsAccountType?accountType=vendor`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
         setResponseData(data);
-        console.log("response Data", data);
+        // console.log("response Data", data);
       })
       .catch(function (error) {
         console.error("Error fetching data:", error);
@@ -166,7 +172,7 @@ const Clients = () => {
     setUserDataNew(convertData(responseData));
   }, [responseData]);
   function convertData(data) {
-    console.log(data);
+    // console.log(data);
     data.map((element) => userData.id.push(element.user_id));
     data.map((element) => userData.vendorName.push(element.name));
     data.map((element) => userData.websiteLink.push(element.website));
@@ -187,7 +193,7 @@ const Clients = () => {
     data.map((element) => userData.salary.push(element.monthlySalary));
     data.map((element) => userData.state.push(element.state));
     data.map((element) => userData.pincode.push(element.zipcode));
-    console.log("userData", userData);
+    // console.log("userData", userData);
 
     let userDataConverted = [];
     const keys = Object.keys(userData);
@@ -199,7 +205,7 @@ const Clients = () => {
       });
       userDataConverted = [...userDataConverted, newObj];
     }
-    console.log("userDataNew", userDataConverted);
+    // console.log("userDataNew", userDataConverted);
     return userDataConverted;
   }
 
@@ -240,7 +246,7 @@ const Clients = () => {
     dispatch(setSelectedRows(selectedRowData));
   };
 
-  console.log("Selected Rows:", checkedRows);
+  // console.log("Selected Rows:", checkedRows);
 
   const content = (
     <Grid container>

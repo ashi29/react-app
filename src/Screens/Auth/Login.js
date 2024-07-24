@@ -34,19 +34,24 @@ const Login = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/login", {
+    fetch("http://localhost:8080/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(loginData),
-    }).then(function (response) {
-      if (response.status === 200) {
-        navigate("/dashboard");
-      }
-      return response.json();
-    });
+    })
+      .then(function (response) {
+        if (response.status === 200) {
+          navigate("/dashboard");
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        handleWaitingModal();
+        console.error(error);
+      });
   };
 
   const handleWaitingModal = () => {

@@ -22,6 +22,14 @@
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
+.fixed-heading-mobile {
+  color: #31baf4;
+  font-family: "Arimo";
+  font-size: 115%;
+  padding: 0.7rem;
+  font-weight: 600;
+  width: 100%;
+}
 
 .add-client-datagrid {
   width: 100%;

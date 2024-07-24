@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-// import { useParams } from "react-router-dom";
 import Layout from "../Layout";
 import { useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
-import { Grid, Switch, Typography } from "@mui/material";
+import {
+  Grid,
+  Switch,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import LabelValueCard from "../../../Components/LabelValueCard/Index";
 import { selectedRow } from "../../../Store/Slice/rowSelectionSlice";
 
@@ -13,7 +18,8 @@ const ClientDetail = () => {
     dataArray[0]?.status ? dataArray[0]?.status : false
   );
   const [isEditable, setIsEditable] = useState(false);
-  // const { id } = useParams();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleEditClick = () => {
     setIsEditable(!isEditable);
@@ -24,8 +30,8 @@ const ClientDetail = () => {
   };
 
   const content = (
-    <Grid container className="client-detail-grid">
-      <Grid item md={11.5} textAlign="right">
+    <Grid container className="client-detail-grid" spacing={2}>
+      <Grid item xs={12} md={11.5} textAlign="right">
         <EditIcon
           color="primary"
           fontSize="large"
@@ -33,151 +39,142 @@ const ClientDetail = () => {
           onClick={handleEditClick}
         />
       </Grid>
-      <Grid item className="section-heading">
+      <Grid item xs={12} className="section-heading">
         Contact Information
       </Grid>
-      <Grid item container md={10}>
-        <Grid item container md={8}>
-          <Grid item className="one-in-a-row">
-            <LabelValueCard
-              label={"Client Name"}
-              value={
-                dataArray[0]?.clientName
-                  ? dataArray[0]?.clientName
-                  : "ScrutinyGlobal"
-              }
-              disabled={!isEditable}
-            />
-          </Grid>
+      <Grid item container xs={12} md={10} spacing={2}>
+        <Grid
+          item
+          container
+          xs={12}
+          md={8}
+          className={isMobile ? "" : "one-in-a-row"}
+        >
+          <LabelValueCard
+            label={"Client Name"}
+            value={dataArray[0]?.clientName ? dataArray[0]?.clientName : ""}
+            disabled={!isEditable}
+          />
         </Grid>
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+        <Grid item container spacing={2}>
+          <Grid item xs={12} md={6}>
             <LabelValueCard
               label="Contact Name"
-              value={
-                dataArray[0]?.contactName
-                  ? dataArray[0]?.contactName
-                  : "ScrutinyGlobal"
-              }
+              value={dataArray[0]?.contactName ? dataArray[0]?.contactName : ""}
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <LabelValueCard
               label="Alt. Contact Name"
               value={
-                dataArray[0]?.altContactName
-                  ? dataArray[0]?.altContactName
-                  : "ScrutinyGlobal"
+                dataArray[0]?.altContactName ? dataArray[0]?.altContactName : ""
               }
               disabled={!isEditable}
             />
           </Grid>
         </Grid>
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+        <Grid item container spacing={2}>
+          <Grid item xs={12} md={6}>
             <LabelValueCard
               label="Contact Number"
               value={
-                dataArray[0]?.contactNumber
-                  ? dataArray[0]?.contactNumber
-                  : "ScrutinyGlobal"
+                dataArray[0]?.contactNumber ? dataArray[0]?.contactNumber : ""
               }
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <LabelValueCard
               label="Alt. Contact Number"
               value={
                 dataArray[0]?.altContactNumber
                   ? dataArray[0]?.altContactNumber
-                  : "ScrutinyGlobal"
+                  : ""
               }
               disabled={!isEditable}
             />
           </Grid>
         </Grid>
-        <Grid item container md={8}>
-          <Grid item className="one-in-a-row">
-            <LabelValueCard
-              label={"Email"}
-              value={
-                dataArray[0]?.email
-                  ? dataArray[0]?.email
-                  : "scrutinyglobal0987@gmail.com"
-              }
-              disabled={!isEditable}
-            />
-          </Grid>
-
-          <Grid item className="one-in-a-row">
-            <LabelValueCard
-              label={"Website Link"}
-              value={
-                dataArray[0]?.websiteLink
-                  ? dataArray[0]?.websiteLink
-                  : "www.scrutinyglobal.com"
-              }
-              disabled={!isEditable}
-            />
-          </Grid>
+        <Grid
+          item
+          container
+          xs={12}
+          md={8}
+          className={isMobile ? "" : "one-in-a-row"}
+        >
+          <LabelValueCard
+            label={"Email"}
+            value={dataArray[0]?.email ? dataArray[0]?.email : "0987@gmail.com"}
+            disabled={!isEditable}
+          />
+        </Grid>
+        <Grid
+          item
+          container
+          xs={12}
+          md={8}
+          className={isMobile ? "" : "one-in-a-row"}
+        >
+          <LabelValueCard
+            label={"Website Link"}
+            value={
+              dataArray[0]?.websiteLink ? dataArray[0]?.websiteLink : "www..com"
+            }
+            disabled={!isEditable}
+          />
         </Grid>
       </Grid>
 
-      <Grid item className="section-heading">
+      <Grid item xs={12} className="section-heading">
         Address Information
       </Grid>
-      <Grid item container md={10}>
-        <Grid item container md={8}>
-          <Grid item className="one-in-a-row">
-            <LabelValueCard
-              label={"Address"}
-              value={
-                dataArray[0]?.address ? dataArray[0]?.address : "ScrutinyGlobal"
-              }
-              disabled={!isEditable}
-            />
-          </Grid>
+      <Grid item container xs={12} md={10} spacing={2}>
+        <Grid
+          item
+          container
+          xs={12}
+          md={8}
+          className={isMobile ? "" : "one-in-a-row"}
+        >
+          <LabelValueCard
+            label={"Address"}
+            value={dataArray[0]?.address ? dataArray[0]?.address : ""}
+            disabled={!isEditable}
+          />
         </Grid>
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+        <Grid item container spacing={2}>
+          <Grid item xs={12} md={6}>
             <LabelValueCard
               label="Country"
-              value={
-                dataArray[0]?.country ? dataArray[0]?.country : "ScrutinyGlobal"
-              }
+              value={dataArray[0]?.country ? dataArray[0]?.country : ""}
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <LabelValueCard
               label="Currency"
-              value={
-                dataArray[0]?.currency
-                  ? dataArray[0]?.currency
-                  : "ScrutinyGlobal"
-              }
+              value={dataArray[0]?.currency ? dataArray[0]?.currency : ""}
               disabled={!isEditable}
             />
           </Grid>
         </Grid>
-        <Grid item container md={8}>
-          <Grid item className="one-in-a-row">
-            <LabelValueCard
-              label={"Industry"}
-              value={
-                dataArray[0]?.industry
-                  ? dataArray[0]?.industry
-                  : "ScrutinyGlobal"
-              }
-              disabled={!isEditable}
-            />
-          </Grid>
+        <Grid
+          item
+          container
+          xs={12}
+          md={8}
+          className={isMobile ? "" : "one-in-a-row"}
+        >
+          <LabelValueCard
+            label={"Industry"}
+            value={dataArray[0]?.industry ? dataArray[0]?.industry : ""}
+            disabled={!isEditable}
+          />
         </Grid>
       </Grid>
 
-      <Grid item className="section-heading">
+      <Grid item xs={12} className="section-heading">
         Status
       </Grid>
       <Grid
@@ -185,6 +182,7 @@ const ClientDetail = () => {
         container
         className="active-inactive-grid"
         alignItems="flex-start"
+        spacing={2}
       >
         <Grid item>
           <Switch

@@ -1,19 +1,20 @@
 import { ListItem, ListItemButton, ListItemIcon } from "@mui/material";
-
 import { styled } from "@mui/system";
 import React from "react";
-import "../Style.css";
 import { Link } from "react-router-dom";
+import "../Style.css";
 
-const Paper = styled("div")(({ theme, isActive }) => ({
-  // fontFamily: "Arimo",
-  // fontSize: "100%",
-  fontWeight: isActive ? "700" : "400",
-  color: isActive ? "#31BAF4" : "inherit",
+const Paper = styled("div", {
+  shouldForwardProp: (prop) => prop !== "isActiveState",
+})(({ theme, isActiveState }) => ({
+  fontWeight: isActiveState ? "700" : "400",
+  color: isActiveState ? "#31BAF4" : "inherit",
 }));
 
-const StyledListItemButton = styled(ListItemButton)(({ theme, isActive }) => ({
-  backgroundColor: isActive ? "#DEF5FF" : "inherit",
+const StyledListItemButton = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== "isActiveState",
+})(({ theme, isActiveState }) => ({
+  backgroundColor: isActiveState ? "#DEF5FF" : "inherit",
   borderRadius: "50px",
 }));
 
@@ -26,9 +27,9 @@ const LinkButton = ({
 }) => (
   <Link to={`/${link}`} className={className}>
     <ListItem key={text} disablePadding>
-      <StyledListItemButton isActive={active}>
+      <StyledListItemButton isActiveState={active}>
         <ListItemIcon>{icon}</ListItemIcon>
-        <Paper isActive={active} className={className}>
+        <Paper isActiveState={active} className={className}>
           {text}
         </Paper>
       </StyledListItemButton>

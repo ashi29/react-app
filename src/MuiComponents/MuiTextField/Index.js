@@ -14,6 +14,8 @@ export const MuiTextField = ({
   required,
   rows,
 }) => {
+  const isControlled = value !== undefined;
+
   return (
     <>
       <InputLabel className={className ? className : "arimo-input-label"}>
@@ -24,10 +26,10 @@ export const MuiTextField = ({
       <TextField
         name={value}
         type={type}
-        defaultValue={defaultValue}
         placeholder={placeholder ? placeholder : label}
         variant="standard"
-        value={value}
+        value={isControlled ? value : undefined} // Controlled value
+        defaultValue={!isControlled ? defaultValue : undefined} // Uncontrolled defaultValue
         onChange={onChange}
         multiline={rows ? true : false}
         rows={rows}

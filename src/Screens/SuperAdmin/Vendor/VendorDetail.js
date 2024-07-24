@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import Layout from "../Layout";
 import { useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Grid, Switch, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import LabelValueCard from "../../../Components/LabelValueCard/Index";
 import { selectedRow } from "../../../Store/Slice/rowSelectionSlice";
 
 const VendorDetail = () => {
   const dataArray = useSelector(selectedRow);
-  console.log("selectedRows11 :>> ", dataArray[0]);
   const [isEditable, setIsEditable] = useState(false);
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const handleEditClick = () => {
     setIsEditable(!isEditable);
   };
 
   const content = (
-    <Grid container className="client-detail-grid">
-      <Grid item md={11.5} textAlign="right">
+    <Grid container className="client-detail-grid" spacing={2}>
+      <Grid item xs={12} md={11.5} textAlign="right">
         <EditIcon
           color="primary"
           fontSize="large"
@@ -27,12 +26,12 @@ const VendorDetail = () => {
           onClick={handleEditClick}
         />
       </Grid>
-      <Grid item className="section-heading">
+      <Grid item xs={12} className="section-heading">
         Contact Information
       </Grid>
-      <Grid item container md={10}>
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+      <Grid item container xs={12} md={10} spacing={2}>
+        <Grid item container spacing={2}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label={"Vendors Name"}
               value={
@@ -43,7 +42,7 @@ const VendorDetail = () => {
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label={"Email"}
               value={
@@ -55,8 +54,8 @@ const VendorDetail = () => {
             />
           </Grid>
         </Grid>
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+        <Grid item container spacing={2}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="Contact Number"
               value={
@@ -67,7 +66,7 @@ const VendorDetail = () => {
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="Alt. Contact Number"
               value={
@@ -79,8 +78,8 @@ const VendorDetail = () => {
             />
           </Grid>
         </Grid>
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+        <Grid item container spacing={2}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="Address"
               value={
@@ -89,7 +88,7 @@ const VendorDetail = () => {
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="City"
               value={dataArray[0]?.city ? dataArray[0]?.city : "ScrutinyGlobal"}
@@ -97,8 +96,8 @@ const VendorDetail = () => {
             />
           </Grid>
         </Grid>
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+        <Grid item container spacing={2}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="Country"
               value={
@@ -107,7 +106,7 @@ const VendorDetail = () => {
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="Pincode"
               value={
@@ -119,52 +118,12 @@ const VendorDetail = () => {
         </Grid>
       </Grid>
 
-      {/* <Grid item className="section-heading">
-        Redirect Links
-      </Grid>
-      <Grid item container md={6}>
-        <Grid item className="one-in-a-row">
-          <LabelValueCard
-            label={"Success URL"}
-            value={
-              dataArray[0]?.successURL
-                ? dataArray[0]?.successURL
-                : "ScrutinyGlobal"
-            }
-            disabled={!isEditable}
-          />
-        </Grid>
-        <Grid item className="one-in-a-row">
-          <LabelValueCard
-            label={"Terminate URL"}
-            value={
-              dataArray[0]?.terminateURL
-                ? dataArray[0]?.terminateURL
-                : "ScrutinyGlobal"
-            }
-            disabled={!isEditable}
-          />
-        </Grid>
-
-        <Grid item className="one-in-a-row">
-          <LabelValueCard
-            label={"Quotaful URL"}
-            value={
-              dataArray[0]?.quotafulURL
-                ? dataArray[0]?.quotafulURL
-                : "ScrutinyGlobal"
-            }
-            disabled={!isEditable}
-          />
-        </Grid>
-      </Grid> */}
-
-      <Grid item className="section-heading">
+      <Grid item xs={12} className="section-heading">
         Comapny & Bank Details
       </Grid>
-      <Grid item container md={10}>
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+      <Grid item container xs={12} md={10} spacing={2}>
+        <Grid item container spacing={2}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label={"Registration Number"}
               value={
@@ -175,7 +134,7 @@ const VendorDetail = () => {
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label={"PAN Number"}
               value={
@@ -186,8 +145,8 @@ const VendorDetail = () => {
           </Grid>
         </Grid>
 
-        <Grid item container spacing={5}>
-          <Grid item md={6}>
+        <Grid item container spacing={2}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="Bank Branch Address"
               value={
@@ -198,7 +157,7 @@ const VendorDetail = () => {
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="Account Number"
               value={
@@ -213,10 +172,10 @@ const VendorDetail = () => {
         <Grid
           item
           container
-          spacing={5}
+          spacing={2}
           className="add-margin-below active-inactive-grid"
         >
-          <Grid item md={6}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="Account Type"
               value={
@@ -227,7 +186,7 @@ const VendorDetail = () => {
               disabled={!isEditable}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={8} md={6}>
             <LabelValueCard
               label="IFSC Code"
               value={dataArray[0]?.ifsc ? dataArray[0]?.ifsc : "ScrutinyGlobal"}

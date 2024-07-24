@@ -17,11 +17,18 @@ const CollapseButton = ({ text, icon, open, handleClick, children }) => {
       <ListItem disablePadding>
         <ListItemButton className="remove-extraBoldness" onClick={handleClick}>
           <Grid container justifyContent="space-between">
-            <Grid item container direction="row" alignItems="center" md={10}>
+            <Grid
+              item
+              container
+              direction="row"
+              alignItems="center"
+              xs={10}
+              md={10}
+            >
               <ListItemIcon>{icon}</ListItemIcon>
               <Typography className="sidebar-text">{text}</Typography>
             </Grid>
-            <Grid item md={2}>
+            <Grid item xs={2} md={2}>
               {open ? <ExpandLess /> : <ExpandMore />}
             </Grid>
           </Grid>

@@ -25,10 +25,22 @@
 }
 .search-input {
   width: 25rem;
-  padding: 0.6rem 1.5rem 0.5rem 1rem;
+  padding: 0.6rem 0.5rem 0.5rem 0.8rem;
   gap: 0px;
   opacity: 0px;
-  border-radius: 10px !important;
+  border-radius: 7px !important;
+  box-shadow: 0px 2px 5px 0px #0000000f, 0px 10px 10px 0px #0000000d,
+    0px 21px 13px 0px #00000008, 0px 38px 15px 0px #00000003,
+    0px 60px 17px 0px #00000000;
+}
+
+.search-input-mobile {
+  /* width: 23rem; */
+  padding: 0.6rem 0.5rem 0.5rem 0.8rem;
+  margin: 0.6rem 0.5rem 0.5rem 0.8rem !important;
+  gap: 0px;
+  opacity: 0px;
+  border-radius: 7px !important;
   box-shadow: 0px 2px 5px 0px #0000000f, 0px 10px 10px 0px #0000000d,
     0px 21px 13px 0px #00000008, 0px 38px 15px 0px #00000003,
     0px 60px 17px 0px #00000000;

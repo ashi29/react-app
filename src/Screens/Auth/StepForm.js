@@ -5,6 +5,7 @@ import { MuiDropDown } from "../../MuiComponents/MuiDropDown/Index";
 import CustomContainedButton from "../../MuiComponents/MuiContainedButton/Index";
 // import axios from "axios";
 import { useSelector } from "react-redux";
+import { API_PREFIX } from "../../config";
 
 const StepForm = ({
   formStep,
@@ -53,7 +54,7 @@ const StepForm = ({
 
   const [countriesData, setCountriesData] = useState([""]);
   useEffect(() => {
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getCountries", {
+    fetch(`${API_PREFIX}getCountries`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -296,14 +297,15 @@ const StepForm = ({
       return (
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <MuiDropDown
+            <MuiTextField
               required={true}
               value={profession}
               onChange={onChangeProfession}
               defaultValue={reduxData?.profession || ""}
-              options={["profession1", "profession2", "profession2"]} // Example options
+              // options={["profession1", "profession2", "profession2"]} // Example options
               placeholder={"Ex: Software Developer"}
               label="Profession"
+              type="text"
               className="forRegister"
             />
           </Grid>

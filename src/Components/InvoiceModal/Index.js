@@ -13,16 +13,15 @@ const InvoiceModal = ({
   show,
   handleClose,
   ClientName,
-  totalNoofSurveys,
   successfulSurveys,
   costPerSurvey,
 }) => {
   const today = new Date();
   const options = { weekday: "long" };
-  const day = today.toLocaleDateString("en-IN", options);
+  // const day = today.toLocaleDateString("en-IN", options);
   const date = today.toLocaleDateString("en-IN");
 
-  const totalCost = successfulSurveys * costPerSurvey;
+  // const totalCost = successfulSurveys * costPerSurvey;
 
   const handlePdfDownload = () => {
     const input = document.getElementById("pdf-content");

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Grid from "@mui/material/Grid";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const CustomTabPanel = ({ children, value, index, ...other }) => {
   return (
@@ -34,18 +35,23 @@ function a11yProps(index) {
 
 const MuiTab = ({ tabs }) => {
   const [value, setValue] = useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <Grid container>
+    <Grid container direction={isMobile ? "column" : "row"}>
       <Grid item xs={12}>
         <Tabs
           value={value}
           onChange={handleChange}
+          orientation={isMobile ? "vertical" : "horizontal"}
           aria-label="basic tabs example"
+          variant="scrollable"
+          scrollButtons="auto"
         >
           {tabs.map((tab, index) => (
             <Tab label={tab.label} {...a11yProps(index)} key={index} />

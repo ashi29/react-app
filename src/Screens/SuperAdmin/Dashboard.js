@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import { Button, Grid } from "@mui/material";
 import InfoCard from "../../Components/InfoCard/Index";
 import "./Style.css";
@@ -10,6 +9,7 @@ import Group from "../../Images/Dashboard/Group.png";
 import Vector from "../../Images/Dashboard/Vector.png";
 import Layout from "./Layout";
 import MuiDataGrid from "../../MuiComponents/MuiDataGrid/Index";
+import { API_PREFIX } from "../../config";
 
 const Dashboard = () => {
   const [approved, setApproved] = useState(false);
@@ -72,14 +72,13 @@ const Dashboard = () => {
       salary: "500000",
     },
   ];
-  console.log(rows);
 
   useEffect(() => {
     getUserData();
   }, []);
 
   function getUserData() {
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getUserList", {
+    fetch(`${API_PREFIX}getUserList`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -107,7 +106,6 @@ const Dashboard = () => {
     setUserDataNew(convertData(responseData));
   }, [responseData]);
   function convertData(data) {
-    console.log(data);
     data.map((element) => userData.id.push(element.userId));
     data.map((element) => userData.username.push(element.name));
     data.map((element) => userData.number.push(element.number));
@@ -124,7 +122,6 @@ const Dashboard = () => {
     data.map((element) => userData.salary.push(element.monthlySalary));
     data.map((element) => userData.state.push(element.state));
     data.map((element) => userData.zipCode.push(element.zipcode));
-    console.log("userData", userData);
 
     let userDataConverted = [];
     const keys = Object.keys(userData);
@@ -136,12 +133,12 @@ const Dashboard = () => {
       });
       userDataConverted = [...userDataConverted, newObj];
     }
-    console.log("userDataNew", userDataConverted);
+    // console.log("userDataNew", userDataConverted);
     return userDataConverted;
   }
 
-  console.log("response outside the function", responseData);
-  console.log("userDataNew outside the function", userDataNew);
+  // console.log("response outside the function", responseData);
+  // console.log("userDataNew outside the function", userDataNew);
 
   const handleApprove = (id, accountType) => {
     const approvedData = {
@@ -153,7 +150,7 @@ const Dashboard = () => {
       securityTerminateURL: "",
       description: "",
     };
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/setroletouser", {
+    fetch(`${API_PREFIX}setroletouser`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -167,16 +164,16 @@ const Dashboard = () => {
 
     // console.log("approvedData :>> ", approvedData);
 
-    console.log("user is approved");
-    setApproved(!approved);
+    // console.log("user is approved");
   };
 
-  const [columns, setColumns] = useState([
+  const columns = [
     {
       field: "id",
       headerName: "User id",
       width: 120,
       align: "center",
+      editable: false,
       headerAlign: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -186,7 +183,6 @@ const Dashboard = () => {
       headerName: "Approval",
       width: 160,
       headerAlign: "center",
-      editable: true,
       align: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -215,7 +211,7 @@ const Dashboard = () => {
       type: "text",
       width: 170,
       headerAlign: "center",
-      editable: true,
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       // valueGetter: (params) =>
@@ -226,6 +222,7 @@ const Dashboard = () => {
       headerName: "Number",
       sortable: false,
       width: 170,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -236,6 +233,7 @@ const Dashboard = () => {
       headerName: "Email",
       sortable: false,
       width: 200,
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -245,12 +243,12 @@ const Dashboard = () => {
       headerName: "Role",
       width: 160,
       headerAlign: "center",
-      editable: true,
       align: "center",
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       renderCell: (params) => {
-        console.log("hi====", params.row);
+        // console.log("hi====", params.row);
         return (
           <MuiDropDown
             defaultValue="Vendor"
@@ -266,6 +264,7 @@ const Dashboard = () => {
       sortable: false,
       width: 180,
       align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -276,6 +275,7 @@ const Dashboard = () => {
       sortable: false,
       width: 180,
       align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -286,6 +286,7 @@ const Dashboard = () => {
       sortable: false,
       width: 170,
       align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -296,6 +297,7 @@ const Dashboard = () => {
       headerName: "State/Province",
       sortable: false,
       width: 170,
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       headerAlign: "center",
@@ -306,6 +308,7 @@ const Dashboard = () => {
       align: "center",
       sortable: false,
       width: 170,
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       headerAlign: "center",
@@ -316,6 +319,7 @@ const Dashboard = () => {
       align: "center",
       sortable: false,
       width: 170,
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       headerAlign: "center",
@@ -325,6 +329,7 @@ const Dashboard = () => {
       headerName: "Profession",
       sortable: false,
       align: "center",
+      editable: false,
       width: 170,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -335,6 +340,7 @@ const Dashboard = () => {
       headerName: "IP Address",
       sortable: false,
       width: 170,
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       headerAlign: "center",
@@ -346,6 +352,7 @@ const Dashboard = () => {
       sortable: false,
       width: 170,
       align: "center",
+      editable: false,
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
       headerAlign: "center",
@@ -355,22 +362,21 @@ const Dashboard = () => {
       headerName: "Salary/mo",
       sortable: false,
       width: 170,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
     },
-  ]);
+  ];
 
   const onChangeRole = () => {
-    console.log("onChange called ");
+    // console.log("onChange called ");
   };
 
-  useEffect(() => {}, [approved]);
-
-  function getRowId(userDataNew) {
-    return userDataNew.id;
-  }
+  // function getRowId(userDataNew) {
+  //   return userDataNew.id;
+  // }
 
   const content = (
     <Grid container className="dashboard-container">

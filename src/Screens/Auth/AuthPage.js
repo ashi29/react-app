@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Card,
   CardActions,
@@ -7,6 +8,8 @@ import {
   Paper,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import backgroundImage from "../../Images/AuthImages/background.png";
 import "./Style.css";
@@ -21,38 +24,60 @@ const AuthPage = ({
   cardActionText,
   additionalComponent,
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Grid className="main-container">
       <Grid item container className="container" md={9}>
-        <Grid item container md={5} justifyContent="center" alignItems="center">
-          <Grid item container justifyContent="center" alignItems="center">
-            <Grid item>
-              <Typography className="vollkorn-hello">
-                Hello !Welcome to{" "}
-              </Typography>
-              <Typography className="vollkorn-scrutiny">
-                Srutiny Global
-              </Typography>
+        {!isMobile && (
+          <Grid
+            item
+            container
+            md={5}
+            xs="none"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item container justifyContent="center" alignItems="center">
+              <Grid item>
+                <Typography className="vollkorn-hello">
+                  Hello! Welcome to{" "}
+                </Typography>
+                <Typography className="vollkorn-scrutiny">
+                  Srutiny Global
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item container justifyContent="center" alignItems="center">
+              <img
+                src={backgroundImage}
+                alt="scrutiny-global"
+                className="image"
+              />
+            </Grid>
+            <Grid item className="vollkorn-body">
+              A Panel for project management
             </Grid>
           </Grid>
-          <Grid item container justifyContent="center" alignItems="center">
-            <img
-              src={backgroundImage}
-              alt="scrutiny-global"
-              className="image"
-            />
-          </Grid>
-          <Grid item className="vollkorn-body">
-            A Panel for project management
-          </Grid>
-        </Grid>
+        )}
         <Grid item xs={12} md={7}>
-          <Card className="card-form-container">
+          <Card
+            className={
+              isMobile ? "card-form-container-mobile" : "card-form-container"
+            }
+          >
             <CardContent>
-              <Typography className="vollkorn-Login">{heading}</Typography>
+              <Typography
+                className={
+                  isMobile ? "vollkorn-Login-mobile" : "vollkorn-Login"
+                }
+              >
+                {heading}
+              </Typography>
             </CardContent>
             <CardMedia component="img" image={logo} className="logo-image" />
-            <CardContent sx={{ mx: 13 }} className="card-form">
+            <CardContent sx={{ mx: isMobile ? 5 : 13 }} className="card-form">
               {form}
             </CardContent>
             <Grid container className="flex-and-center" sx={{ mb: 1 }}>

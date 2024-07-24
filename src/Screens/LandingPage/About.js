@@ -1,16 +1,22 @@
 import React from "react";
-import { Grid, Typography, Stack } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Stack,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import aboutImage from "./../../Images/LandingImages/AboutImages/aboutImage.png";
 import cardImage1 from "./../../Images/LandingImages/AboutImages/CardImage/cardImage1.png";
 import cardImage2 from "./../../Images/LandingImages/AboutImages/CardImage/cardImage2.png";
 import cardImage3 from "./../../Images/LandingImages/AboutImages/CardImage/cardImage3.png";
 import CardComponentImage from "../../MuiComponents/MuiCards/CardComponentImage";
-import MuiContainedButton from "../../MuiComponents/MuiContainedButton/Index";
 import CenteredTextSection from "../../Components/CenteredTextSection/Index";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import aboutImage2 from "./../../Images/LandingImages/AboutImages/aboutImage2.png";
 import aboutImage3 from "./../../Images/LandingImages/AboutImages/aboutImage3.png";
 import aboutImage4 from "./../../Images/LandingImages/AboutImages/aboutImage4.png";
+import aboutImage5 from "./../../Images/LandingImages/AboutImages/aboutImage5.jpg";
+import aboutImage6 from "./../../Images/LandingImages/AboutImages/aboutImage6.jpg";
 import CheckBoxWithText from "../../MuiComponents/MuiCards/CheckBoxWithText";
 import MuiTab from "../../MuiComponents/MuiTab/Index";
 import CheckIcon from "@mui/icons-material/Check";
@@ -260,6 +266,9 @@ const About = () => {
     },
   ];
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Grid container id="about" className="about-grid ">
       <Grid
@@ -268,7 +277,7 @@ const About = () => {
         spacing={2}
         alignItems="center"
         justifyContent="center"
-        className="aboutSection1"
+        className={!isMobile ? "aboutSection1" : "home-sub-grid-mobile"}
       >
         <Grid item md={6} className="aboutSectionText1">
           <Typography className="about-section-heading1" gutterBottom>
@@ -302,11 +311,11 @@ const About = () => {
             project is a success.
           </Typography>
 
-          <MuiContainedButton
+          {/* <MuiContainedButton
             buttonText={"Read More"}
             type={"button"}
             endIcon={<ArrowForwardIcon />}
-          />
+          /> */}
         </Grid>
         <Grid item md={6}>
           <img src={aboutImage} alt="About" className="aboutImage1" />
@@ -327,25 +336,31 @@ const About = () => {
             </>
           }
           subtitle="We recognize the importance of expediency and thus, operate with swiftness and efficacy to ensure the punctual delivery of your outcomes, as delineated by the following aspects."
-          image={aboutImage}
+          image={aboutImage5}
         />
       </Grid>
-      <Grid item container spacing={2}>
-        <Grid item xs={12} sm={12} md={4}>
+      <Grid
+        item
+        container
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+      >
+        <Grid item xs={12} sm={12} md={4} className="same-height-card">
           <CardComponentImage
             image={cardImage1}
             title="Diversity in Departments"
             text="Our prowess is multi-faceted. We excel in Quantitative and Qualitative research, conduct Online Surveys, gauge Public Opinion, curate meticulous Data Collections, dissect Media intricacies, and unravel profound Covid-19 Insights. This versatility tailors our platform for clients in pursuit of diverse viewpoints or specific market niches."
           />
         </Grid>
-        <Grid item xs={12} sm={12} md={4}>
+        <Grid item xs={12} sm={12} md={4} className="same-height-card">
           <CardComponentImage
             image={cardImage2}
             title="Global Reach"
             text="Seizing opportunities on a global scale, we empower our clients to connect with respondents spanning the farthest reaches. We specialize in procuring top-tier responses from the most elusive participants – be it IT professionals, HR experts, Finance wizards, Sales mavens, or even esteemed C-Level executives and department heads."
           />
         </Grid>
-        <Grid item xs={12} sm={12} md={4}>
+        <Grid item xs={12} sm={12} md={4} className="same-height-card">
           <CardComponentImage
             image={cardImage3}
             title="Multiple Target Platforms"
@@ -354,34 +369,43 @@ const About = () => {
         </Grid>
       </Grid>
 
-      <Grid item xs={12}>
-        <CenteredTextSection
-          image={aboutImage}
-          title={"Our Features"}
-          subtitle={
-            "We offers the powerful survey features for any research need"
-          }
-        />
-      </Grid>
-
       <Grid
-        item
         container
-        spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        className="aboutSection2"
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
       >
-        <Grid item xs={12} sm={12} md={6} spacing={2}>
-          <img src={aboutImage2} alt="features" className="aboutImage2" />
+        <Grid item>
+          <CenteredTextSection
+            image={aboutImage6}
+            title={"Our Features"}
+            subtitle={
+              "We offers the powerful survey features for any research need"
+            }
+          />
         </Grid>
 
-        <Grid item container spacing={2} xs={12} sm={12} md={6}>
-          {featuresTextArray.map((text, index) => (
-            <Grid item xs={12} sm={6} md={6} key={index}>
-              <CheckBoxWithText text={text} />
+        <Grid
+          item
+          container
+          spacing={2}
+          justifyContent="center"
+          alignItems="center"
+          className="aboutSection2"
+        >
+          <Grid item xs={12} sm={12} md={6}>
+            <img src={aboutImage2} alt="features" className="aboutImage2" />
+          </Grid>
+
+          <Grid item xs={12} sm={12} md={6}>
+            <Grid container spacing={2} direction={isMobile ? "column" : "row"}>
+              {featuresTextArray.map((text, index) => (
+                <Grid item xs={12} sm={6} md={6} key={index} marginBottom="2%">
+                  <CheckBoxWithText text={text} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
+          </Grid>
         </Grid>
       </Grid>
 
@@ -393,11 +417,15 @@ const About = () => {
         alignItems="center"
         className="aboutSection3"
       >
-        <Grid item xs={12} md={6}>
-          <Typography className="aboutSection3-heading">
-            Quality you can Trust
-          </Typography>
-          <MuiTab tabs={tabs} />
+        <Grid item container xs={12} md={6}>
+          <Grid item>
+            <Typography className="aboutSection3-heading">
+              Quality you can Trust
+            </Typography>
+          </Grid>
+          <Grid item>
+            <MuiTab tabs={tabs} />
+          </Grid>
         </Grid>
         <Grid item xs={12} md={6}>
           <img src={aboutImage3} alt="features" className="aboutImage2" />
@@ -408,8 +436,8 @@ const About = () => {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6} className="flex-and-center ">
-          <img src={aboutImage4} alt="features" />
+        <Grid item xs={12} sm={12} md={6}>
+          <img src={aboutImage4} alt="features" className="aboutImage3" />
         </Grid>
         <Grid item container xs={12} md={6}>
           {whyChooseUstextArray.map((item, index) => (

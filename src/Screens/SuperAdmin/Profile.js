@@ -46,7 +46,7 @@ const Profile = () => {
 
   const content = (
     <Grid container className="profile-detail-grid">
-      <Grid item md={11.5} textAlign="right">
+      <Grid item xs={12} md={11.5} textAlign="right">
         <MuiContainedButton
           type={"submit"}
           onClickFunction={handleSave}
@@ -62,12 +62,19 @@ const Profile = () => {
           item
           container
           md={5}
+          xs={12}
           //   justifyContent="center"
           //   alignItems="center"
           direction="column"
         >
           <Paper className="profile-card-1">
-            <Grid item container justifyContent="center" alignItems="center">
+            <Grid
+              item
+              container
+              xs={12}
+              justifyContent="center"
+              alignItems="center"
+            >
               <img
                 src={userDetails.image}
                 alt="profile"
@@ -88,8 +95,8 @@ const Profile = () => {
             <Typography className="change-password">Change Password</Typography>
           </Grid>
         </Grid>
-        <Grid item container md={7}>
-          <Grid item md={12} className="profile-card-2">
+        <Grid item container xs={12} md={7}>
+          <Grid item md={12} xs={12} className="profile-card-2">
             <Typography className="profile-card2-heading" gutterBottom>
               Personal Details
             </Typography>
@@ -150,7 +157,7 @@ const Profile = () => {
               handleChange={handleChange}
             />
           </Grid>
-          <Grid item md={12} className="profile-card-2">
+          <Grid item md={12} xs={12} className="profile-card-2">
             <Typography className="profile-card2-heading" gutterBottom>
               Address Details
             </Typography>

@@ -11,6 +11,7 @@ export const MuiDropDown = ({
   className,
   required,
 }) => {
+  const isControlled = value !== undefined;
   const name = value;
   return (
     <>
@@ -20,17 +21,18 @@ export const MuiDropDown = ({
       </InputLabel>
       <Autocomplete
         id={`${name}-autocomplete`}
-        value={value}
         size="small"
-        defaultValue={defaultValue}
+        value={isControlled ? value : null}
+        defaultValue={!isControlled ? defaultValue : null}
         onChange={(event, newValue) => {
           onChange({
             target: {
-              name: name,
+              name: label,
               value: newValue,
             },
           });
         }}
+        getOptionLabel={(option) => option} // Assuming options are strings
         options={options}
         renderInput={(params) => (
           <TextField
@@ -39,13 +41,6 @@ export const MuiDropDown = ({
             variant="standard"
             size="small"
             className={className ? className : "arimo-input-label"}
-            // InputProps={{
-            //   ...params.InputProps,
-            //   style: { paddingLeft: "10px" },
-            // }}
-            // InputLabelProps={{
-            //   style: { paddingLeft: "10px" },
-            // }}
             InputProps={{
               ...params.InputProps,
               classes: {
@@ -57,6 +52,7 @@ export const MuiDropDown = ({
             }}
           />
         )}
+        isOptionEqualToValue={(option, value) => option === value} // Assuming options are strings
       />
     </>
   );

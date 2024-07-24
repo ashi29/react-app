@@ -9,7 +9,6 @@ const rowSelectionSlice = createSlice({
   initialState,
   reducers: {
     setSelectedRows: (state, action) => {
-      console.log("action.payload :>> ", action.payload);
       state.selectedRows = action.payload;
     },
   },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, useMediaQuery, useTheme } from "@mui/material";
 import StepForm from "../../../Components/StepForm/Index";
 import { MuiTextField } from "../../../MuiComponents/MuiTextField/Index";
 import { MuiDropDown } from "../../../MuiComponents/MuiDropDown/Index";
@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { selectAddVendorStep } from "../../../Store/Slice/stepSlice";
 import SuccessErrorModal from "../../../Components/SuccesErrorModal/Index";
 import MuiMultiSelectDropdown from "../../../MuiComponents/MuiMultiSelectDropdown/Index";
+import { API_PREFIX } from "../../../config";
 
 const AddVendor = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const AddVendor = () => {
   const [ifsc, setIfsc] = useState("");
   const [accountType, setAccountType] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showErrorModal, setShowErrorModal] = useState(false);
+  // const [showErrorModal, setShowErrorModal] = useState(false);
   const [document, setDocument] = useState(null);
   const [countriesData, setCountriesData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
@@ -50,7 +51,6 @@ const AddVendor = () => {
     bankBranchAddress: bankBranchAddress,
     accountNumber: accountNo,
     ifscCode: ifsc,
-    accountType: "vendor",
     contactName: vendorName,
     contactEmail: email,
     alternateNumber: alternateContactNumber,
@@ -69,8 +69,6 @@ const AddVendor = () => {
     const selectedVendor = vendorData.find(
       (Vendor) => Vendor.name === selectedVendorName
     );
-
-    console.log("selectedVendor :>> ", selectedVendor);
 
     if (selectedVendor) {
       setUserId(selectedVendor.userId);
@@ -150,7 +148,7 @@ const AddVendor = () => {
   const [vendorUserName, setVendorUserName] = useState([]);
 
   useEffect(() => {
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getUserList", {
+    fetch(`${API_PREFIX}getUserList`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -165,19 +163,19 @@ const AddVendor = () => {
         return res.json();
       })
       .then(function (data) {
-        console.log("data of client : ", data);
+        // console.log("data of client : ", data);
         setVendorData(data);
         setVendorUserName(
           data.map((element) => {
             return element.name;
           })
         );
-        console.log("vendor data seting ", vendorData);
+        // console.log("vendor data seting ", vendorData);
       });
   }, []);
 
   useEffect(() => {
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/getCountries", {
+    fetch(`${API_PREFIX}getCountries`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -210,7 +208,7 @@ const AddVendor = () => {
 
   const steps = [
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiDropDown
           required={true}
           value={vendorName}
@@ -221,7 +219,7 @@ const AddVendor = () => {
           className="forAddClient"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={email}
@@ -232,9 +230,9 @@ const AddVendor = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               required={true}
@@ -245,7 +243,7 @@ const AddVendor = () => {
               className="forAddProject"
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               value={alternateContactNumber}
@@ -259,7 +257,7 @@ const AddVendor = () => {
       </Grid>,
     ],
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={address}
@@ -270,9 +268,9 @@ const AddVendor = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               required={true}
@@ -283,7 +281,7 @@ const AddVendor = () => {
               className="forAddProject"
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               value={alternateContactNumber}
@@ -295,9 +293,9 @@ const AddVendor = () => {
           </Grid>
         </Grid>
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiMultiSelectDropdown
               label={"Country"}
               placeholder={"(Select more countries)"}
@@ -307,7 +305,7 @@ const AddVendor = () => {
               className="forAddProject"
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiDropDown
               value={status}
               //   defaultValue={reduxData?.accountType || ""}
@@ -321,7 +319,7 @@ const AddVendor = () => {
       </Grid>,
     ],
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           value={successURL}
@@ -331,7 +329,7 @@ const AddVendor = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           required={true}
@@ -341,7 +339,7 @@ const AddVendor = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           required={true}
@@ -354,7 +352,7 @@ const AddVendor = () => {
     ],
 
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           required={true}
@@ -365,7 +363,7 @@ const AddVendor = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           required={true}
@@ -376,9 +374,9 @@ const AddVendor = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiDropDown
               value={accountType}
               //   defaultValue={reduxData?.accountType || ""}
@@ -389,7 +387,7 @@ const AddVendor = () => {
               className="forAddProject"
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} md={6}>
             <MuiTextField
               type="text"
               value={ifsc}
@@ -403,7 +401,7 @@ const AddVendor = () => {
       </Grid>,
     ],
     [
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           required={true}
@@ -413,7 +411,7 @@ const AddVendor = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="text"
           required={true}
@@ -423,7 +421,7 @@ const AddVendor = () => {
           className="forAddProject"
         />
       </Grid>,
-      <Grid item>
+      <Grid item xs={12}>
         <MuiTextField
           type="file"
           value={document}
@@ -437,7 +435,7 @@ const AddVendor = () => {
 
   const handleSave = (formData) => {
     // Save form data
-    fetch("http://ec2-13-239-62-154.ap-southeast-2.compute.amazonaws.com:8080/ScrutinyGlobal/setroletouser", {
+    fetch(`${API_PREFIX}setroletouser`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -448,7 +446,7 @@ const AddVendor = () => {
     // setShowSuccessModal(true);
 
     setShowSuccessModal(!showSuccessModal);
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
   };
 
   const handleClose = () => {
@@ -458,27 +456,36 @@ const AddVendor = () => {
   const handleGoToVendors = () => {
     navigate("/vendors");
   };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const content = (
     <Grid container alignItems="center" justifyContent="center">
       <Grid
         item
         container
+        xs={12}
         md={7}
         className="form-grid"
         justifyContent="center"
         alignItems="center"
       >
         <Grid item className="heading-grid">
-          <Paper elevation={0} className="screenHeading">
+          <Paper
+            elevation={0}
+            className={isMobile ? "screenHeading-mobile" : "screenHeading"}
+          >
             Add Vendor
           </Paper>
         </Grid>
-        <Grid item className="fixed-heading">
+        <Grid
+          item
+          className={isMobile ? "fixed-heading-mobile" : "fixed-heading"}
+        >
           {getHeading()}
         </Grid>
         <Grid item>
-          <Paper elevation={2} className="form-sub-grid">
+          <Paper elevation={isMobile ? 0 : 2} className="form-sub-grid">
             <StepForm
               steps={steps}
               onSave={handleSave}
@@ -499,7 +506,7 @@ const AddVendor = () => {
           handleModalButtonClick={handleGoToVendors}
         />
         <SuccessErrorModal
-          show={showErrorModal}
+          // show={showErrorModal}
           handleClose={handleClose}
           imageSrc={CrossFrame}
           clientName={vendorName}

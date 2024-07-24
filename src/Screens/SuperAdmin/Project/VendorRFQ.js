@@ -20,7 +20,7 @@ const VendorRFQ = () => {
     setShow(false);
   };
 
-  const [columns, setColumns] = useState([
+  const columns = [
     {
       field: "select",
       headerName: "",
@@ -34,6 +34,7 @@ const VendorRFQ = () => {
     },
     {
       field: "vendor",
+      editable: false,
       headerName: "Vendor",
       width: 150,
       align: "center",
@@ -43,6 +44,7 @@ const VendorRFQ = () => {
     },
     {
       field: "contact",
+      editable: false,
       headerName: "Contact",
       align: "center",
       width: 150,
@@ -52,6 +54,7 @@ const VendorRFQ = () => {
     },
     {
       field: "email",
+      editable: false,
       headerName: "Email",
       width: 160,
       align: "center",
@@ -62,6 +65,7 @@ const VendorRFQ = () => {
     {
       field: "address",
       headerName: "Address",
+      editable: false,
       width: 150,
       align: "center",
       headerClassName: "dataGrid-header-accpetedRFQ",
@@ -71,6 +75,7 @@ const VendorRFQ = () => {
     {
       field: "city",
       headerName: "City",
+      editable: false,
       width: 150,
       align: "center",
       headerClassName: "dataGrid-header-accpetedRFQ",
@@ -79,6 +84,7 @@ const VendorRFQ = () => {
     },
     {
       field: "pinCode",
+      editable: false,
       headerName: "Pin code",
       width: 150,
       align: "center",
@@ -88,6 +94,7 @@ const VendorRFQ = () => {
     },
     {
       field: "country",
+      editable: false,
       headerName: "Country",
       width: 150,
       align: "center",
@@ -95,7 +102,7 @@ const VendorRFQ = () => {
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
     },
-  ]);
+  ];
 
   const rows = [
     {
@@ -128,7 +135,6 @@ const VendorRFQ = () => {
     );
   };
 
-  console.log("selectedRows :>> ", selectedRows);
   return (
     <Grid container className="client-detail-grid">
       <Grid item className="section-heading">

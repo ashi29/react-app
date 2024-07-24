@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../Layout";
 import { Button, Grid, Typography, TextField } from "@mui/material";
 import tickFrame from "../../../Images/ModalImages/tickFrame.png";
@@ -9,41 +9,97 @@ import MuiMultiSelectDropdown from "../../../MuiComponents/MuiMultiSelectDropdow
 import MuiDataGrid from "../../../MuiComponents/MuiDataGrid/Index";
 import SuccessErrorModal from "../../../Components/SuccesErrorModal/Index";
 import { useNavigate } from "react-router-dom";
+import { API_PREFIX } from "../../../config";
 
 const AssignVendor = () => {
   const [selectedVendors, setSelectedVendors] = useState([]);
   const [selectedRowIds, setSelectedRowIds] = useState([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [vendorId, setVendorId] = useState(0);
+  const [vendorName, setVendorName] = useState("");
+  const [successURL, setSuccessURL] = useState("");
+  const [terminateURL, setTerminateURL] = useState("");
+  const [quotaFullURL, setQuotafulURL] = useState("");
+  const [costPerSurvey, setCostPerSurvey] = useState("");
+  const [projectId,setProjectId] = useState("");
+  const [responseData, setResponseData] = useState([]);
+  const [userDataNew, setUserDataNew] = useState([]);
   const navigate = useNavigate();
 
-  const vendors = [
+  const saveVendorDetais = [
     {
-      id: 1,
-      vendorName: "Vendor 1",
-      successURL: "exampleURL.com",
-      terminateURL: "exampleURL.com",
-      quotafullURL: "exampleURL.com",
-      costPerSurvey: "45",
-    },
-    {
-      id: 2,
-      vendorName: "Vendor 2",
-      successURL: "exampleURL.com",
-      terminateURL: "exampleURL.com",
-      quotafullURL: "exampleURL.com",
-      costPerSurvey: "45",
-    },
-    {
-      id: 3,
-      vendorName: "Vendor 3",
-      successURL:
-        "exampleURL.comexampleURL.comexampleURL.comexampleURL.comexampleURL.comexampleURL.com",
-      terminateURL: "exampleURL.com",
-      quotafullURL: "exampleURL.com",
-      costPerSurvey: "45",
-    },
-  ];
+      projectId : projectId,
+
+    }
+  ]
+
+  const vendorGridData = {
+    id: [],
+    vendorName: [],
+    successURL: [],
+    terminateURL: [],
+    quotafullURL: [],
+    costPerSurvey: [],
+  };
+
+  useEffect(() => {
+    getVendorData();
+  }, []);
+
+  function getVendorData() {
+    fetch(`${API_PREFIX}getListAsAccountType?accountType=vendor`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        setResponseData(data);
+        // console.log("response Data", data);
+        
+      })
+      .catch(function (error) {
+        console.error("Error fetching data:", error);
+      });
+  }
+
+  useEffect(() => {
+    setUserDataNew(convertData(responseData));
+  }, [responseData]);
+  function convertData(data) {
+    // console.log(data);
+    data.map((element) => vendorGridData.id.push(element.user_id));
+    data.map((element) => vendorGridData.vendorName.push(element.name));
+    data.map((element) => vendorGridData.successURL.push(element.successurl));
+    data.map((element) =>
+      vendorGridData.terminateURL.push(element.terminateurl)
+    );
+    data.map((element) =>
+      vendorGridData.quotafullURL.push(element.quota_fullurl)
+    );
+
+    let userDataConverted = [];
+    const keys = Object.keys(vendorGridData);
+    const numObjects = vendorGridData[keys[0]].length;
+    for (let i = 0; i < numObjects; i++) {
+      const newObj = {};
+      keys.forEach((key) => {
+        newObj[key] = vendorGridData[key][i];
+      });
+      userDataConverted = [...userDataConverted, newObj];
+    }
+    console.log("testing",userDataNew);
+    
+    return userDataConverted;
+  }
+
+  console.log("testing outside",userDataNew);
+  
 
   const handleVendorChange = (event) => {
     const {
@@ -53,11 +109,13 @@ const AssignVendor = () => {
     const selectedVendorNames =
       typeof value === "string" ? value.split(",") : value;
     const updatedSelectedVendors = selectedVendorNames.map((vendorName) =>
-      vendors.find((vendor) => vendor.vendorName === vendorName)
+      userDataNew.find((vendor) => vendor.vendorName === vendorName)
     );
+    // const selectedVendorList = userDataNew.map((vendor) => vendor.vendorName === value);
 
     setSelectedVendors(updatedSelectedVendors);
     setSelectedRowIds([]);
+    console.log("testing selectedVendors",selectedVendors);
   };
 
   const handleEditChange = (id, field, value) => {
@@ -77,6 +135,15 @@ const AssignVendor = () => {
   };
 
   const handleSave = () => {
+    fetch(`${API_PREFIX}saveVenderDetails`, {
+      // mode: 'no-cors',
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedVendors),
+    });
     setShowSuccessModal(true);
   };
 
@@ -97,6 +164,7 @@ const AssignVendor = () => {
       field: "id",
       headerName: "S.No.",
       width: 95,
+      editable: false,
       align: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -105,6 +173,7 @@ const AssignVendor = () => {
       field: "link",
       headerName: "Copy Link",
       width: 100,
+      editable: false,
       align: "center",
       cellClassName: "dataGrid-cell",
       headerClassName: "dataGrid-header",
@@ -119,6 +188,7 @@ const AssignVendor = () => {
       field: "vendorName",
       headerName: "Vendor Name",
       width: 180,
+      editable: false,
       align: "center",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -128,6 +198,7 @@ const AssignVendor = () => {
       field: "successURL",
       headerName: "Success URL",
       width: 190,
+      editable: false,
       align: "left",
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -150,6 +221,7 @@ const AssignVendor = () => {
       headerName: "Quotafull URL",
       width: 190,
       align: "left",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -171,6 +243,7 @@ const AssignVendor = () => {
       headerName: "Terminate URL",
       width: 190,
       align: "left",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -192,6 +265,30 @@ const AssignVendor = () => {
       headerName: "Cost/Survey",
       width: 170,
       align: "center",
+      editable: false,
+      headerClassName: "dataGrid-header",
+      cellClassName: "dataGrid-cell",
+      headerAlign: "center",
+
+      renderCell: (params) =>
+        edit ? (
+          <TextField
+            variant="standard"
+            value={params.value}
+            onChange={(e) =>
+              handleEditChange(params.id, params.field, e.target.value)
+            }
+          />
+        ) : (
+          params.value
+        ),
+    },
+    {
+      field: "Target Surveys",
+      headerName: "Target Surveys",
+      width: 190,
+      align: "center",
+      editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
       headerAlign: "center",
@@ -212,7 +309,7 @@ const AssignVendor = () => {
   ];
 
   const content = (
-    <Grid container md={12} spacing={2}>
+    <Grid container spacing={2}>
       <Grid
         item
         container
@@ -220,12 +317,12 @@ const AssignVendor = () => {
         justifyContent="space-between"
         alignItems="end"
       >
-        <Grid item md={5}>
+        <Grid item md={5} xs={12}>
           <MuiMultiSelectDropdown
             label={"Vendor"}
             value={selectedVendors.map((vendor) => vendor.vendorName)}
             onChange={handleVendorChange}
-            options={vendors.map((item) => item.vendorName)}
+            options={userDataNew.map((element) => element.vendorName)}
           />
         </Grid>
         <Grid
@@ -235,8 +332,9 @@ const AssignVendor = () => {
           alignItems="end"
           spacing={2}
           md={7}
+          xs={12}
         >
-          <Grid item>
+          <Grid item display="flex" justifyContent={"flex-end"}>
             <Button
               variant="outlined"
               color="error"
@@ -248,7 +346,7 @@ const AssignVendor = () => {
               Edit
             </Button>
           </Grid>
-          <Grid item>
+          <Grid item display="flex" justifyContent={"flex-end"}>
             <Button
               variant="outlined"
               color="error"
@@ -262,7 +360,7 @@ const AssignVendor = () => {
               Save
             </Button>
           </Grid>
-          <Grid item>
+          <Grid item display="flex" justifyContent={"flex-end"}>
             <Button
               variant="outlined"
               color="error"
@@ -278,33 +376,20 @@ const AssignVendor = () => {
       </Grid>
 
       {selectedVendors.length > 0 ? (
-        <Grid
-          item
-          container
-          md={12}
-          justifyContent="center"
-          alignItems="center"
-        >
+        <Grid item container justifyContent="center" alignItems="center">
           <Grid item className="assignVendor-list-datagrid">
             <MuiDataGrid
               rows={selectedVendors}
               columns={columns}
               checkboxSelection
               onRowSelectionModelChange={(newSelection) => {
-                console.log("Hi");
                 setSelectedRowIds(newSelection);
               }}
             />
           </Grid>
         </Grid>
       ) : (
-        <Grid
-          item
-          container
-          md={11}
-          justifyContent="center"
-          alignItems="center"
-        >
+        <Grid item container justifyContent="center" alignItems="center">
           <Typography
             variant="h6"
             textAlign="center"
