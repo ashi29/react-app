@@ -53,7 +53,7 @@ const Projects = () => {
       field: "status",
       headerName: "Status",
       width: 130,
-      editable: false,
+      editable: true,
       headerAlign: "center",
       // align: "center",
       cellClassName: "dataGrid-cell",

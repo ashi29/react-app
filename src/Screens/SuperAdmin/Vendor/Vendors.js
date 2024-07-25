@@ -239,8 +239,9 @@ const Clients = () => {
   };
   const handleRowSelection = (newRowSelectionModel) => {
     setRowSelectionModel(newRowSelectionModel);
-    const selectedRowData = newRowSelectionModel.map((id) =>
-      rows.find((row) => row.id === id)
+    
+    const selectedRowData = newRowSelectionModel.map((user_id) =>
+      userDataNew.find((row) => row.id === user_id)
     );
     setCheckedRows(selectedRowData);
     dispatch(setSelectedRows(selectedRowData));

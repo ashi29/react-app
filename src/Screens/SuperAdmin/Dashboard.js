@@ -181,7 +181,8 @@ const Dashboard = () => {
     {
       field: "approval",
       headerName: "Approval",
-      width: 160,
+      // flex: 1.2,
+      width: 150,
       headerAlign: "center",
       align: "center",
       cellClassName: "dataGrid-cell",
@@ -209,7 +210,8 @@ const Dashboard = () => {
       headerName: "Name",
       align: "center",
       type: "text",
-      width: 170,
+      // flex: 1.5,
+      width: 150,
       headerAlign: "center",
       editable: false,
       cellClassName: "dataGrid-cell",
@@ -221,6 +223,7 @@ const Dashboard = () => {
       field: "number",
       headerName: "Number",
       sortable: false,
+      // flex: 1.5,
       width: 170,
       editable: false,
       align: "center",
@@ -232,7 +235,8 @@ const Dashboard = () => {
       field: "email",
       headerName: "Email",
       sortable: false,
-      width: 200,
+      // flex: 1.7,
+      width: 180,
       editable: false,
       headerClassName: "dataGrid-header",
       cellClassName: "dataGrid-cell",
@@ -380,13 +384,7 @@ const Dashboard = () => {
 
   const content = (
     <Grid container className="dashboard-container">
-      <Grid
-        item
-        container
-        spacing={3}
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <Grid item container justifyContent="space-between" alignItems="center">
         <Grid item xs={12} md={3}>
           <InfoCard
             title="New Leads"
@@ -398,7 +396,7 @@ const Dashboard = () => {
         <Grid item xs={12} md={4}>
           <InfoCard title="Leads Approved" value="20" subtitle="This week" />
         </Grid>
-        <Grid item md={4}>
+        <Grid item xs={12} md={3}>
           <InfoCard
             title="Ongoing Projects"
             value="50"

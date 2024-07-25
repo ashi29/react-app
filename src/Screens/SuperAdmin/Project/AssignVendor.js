@@ -8,10 +8,11 @@ import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import MuiMultiSelectDropdown from "../../../MuiComponents/MuiMultiSelectDropdown/Index";
 import MuiDataGrid from "../../../MuiComponents/MuiDataGrid/Index";
 import SuccessErrorModal from "../../../Components/SuccesErrorModal/Index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_PREFIX } from "../../../config";
 
 const AssignVendor = () => {
+  const projectId = useParams();
   const [selectedVendors, setSelectedVendors] = useState([]);
   const [selectedRowIds, setSelectedRowIds] = useState([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -22,18 +23,12 @@ const AssignVendor = () => {
   const [terminateURL, setTerminateURL] = useState("");
   const [quotaFullURL, setQuotafulURL] = useState("");
   const [costPerSurvey, setCostPerSurvey] = useState("");
-  const [projectId,setProjectId] = useState("");
+  // const [projectId, setProjectId] = useState("");
   const [responseData, setResponseData] = useState([]);
   const [userDataNew, setUserDataNew] = useState([]);
   const navigate = useNavigate();
 
-  const saveVendorDetais = [
-    {
-      projectId : projectId,
-
-    }
-  ]
-
+  console.log("projectId :>> ", projectId);
   const vendorGridData = {
     id: [],
     vendorName: [],
@@ -61,7 +56,6 @@ const AssignVendor = () => {
       .then(function (data) {
         setResponseData(data);
         // console.log("response Data", data);
-        
       })
       .catch(function (error) {
         console.error("Error fetching data:", error);
@@ -93,13 +87,12 @@ const AssignVendor = () => {
       });
       userDataConverted = [...userDataConverted, newObj];
     }
-    console.log("testing",userDataNew);
-    
+    console.log("testing", userDataNew);
+
     return userDataConverted;
   }
 
-  console.log("testing outside",userDataNew);
-  
+  console.log("testing outside", userDataNew);
 
   const handleVendorChange = (event) => {
     const {
@@ -115,7 +108,7 @@ const AssignVendor = () => {
 
     setSelectedVendors(updatedSelectedVendors);
     setSelectedRowIds([]);
-    console.log("testing selectedVendors",selectedVendors);
+    console.log("testing selectedVendors", selectedVendors);
   };
 
   const handleEditChange = (id, field, value) => {
@@ -135,6 +128,22 @@ const AssignVendor = () => {
   };
 
   const handleSave = () => {
+    const vendorMappingDetails = selectedVendors.map((vendor) => ({
+      venderId: vendor.id,
+      successURL: vendor.successURL,
+      terminateURL: vendor.terminateURL,
+      quotaFullURL: vendor.quotafullURL,
+      securityTerminateURL: "null",
+      rate: vendor.costPerSurvey,
+    }));
+    // clo;
+    const saveVendorDetails = [
+      {
+        projectId: projectId.id,
+        venderMappingDetails: vendorMappingDetails,
+      },
+    ];
+
     fetch(`${API_PREFIX}saveVenderDetails`, {
       // mode: 'no-cors',
       method: "POST",
@@ -142,7 +151,7 @@ const AssignVendor = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(selectedVendors),
+      body: JSON.stringify(saveVendorDetails[0]),
     });
     setShowSuccessModal(true);
   };

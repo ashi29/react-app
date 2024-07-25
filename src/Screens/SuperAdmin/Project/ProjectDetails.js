@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import Layout from "../Layout";
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
@@ -6,16 +6,78 @@ import LabelValueCard from "../../../Components/LabelValueCard/Index";
 import "../Client/Style.css";
 import { useSelector } from "react-redux";
 import { selectedRow } from "../../../Store/Slice/rowSelectionSlice";
+import { API_PREFIX } from "../../../config";
 
 const ProjectDetail = () => {
   const dataArray = useSelector(selectedRow);
   const [isEditable, setIsEditable] = useState(false);
+  const [responseData, setResponseData] = useState([]);
 
   const handleEditClick = () => {
     setIsEditable(!isEditable);
   };
 
-  const vendorLength = 0;
+  useEffect(() => {
+    getVendorData();
+  }, []);
+
+  function getVendorData() {
+    fetch(`${API_PREFIX}getProjectVenderList?venderMappingId=V5127`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        setResponseData(data);
+        // console.log("response Data", data);
+      })
+      .catch(function (error) {
+        console.error("Error fetching data:", error);
+      });
+  }
+  const vendorGridData = {
+    vendorName: [],
+    successURL: [],
+    terminateURL: [],
+    quotafullURL: [],
+    costPerSurvey: [],
+  };
+
+  const [userDataNew, setUserDataNew] = useState([]);
+  useEffect(() => {
+    setUserDataNew(convertData(responseData));
+  }, [responseData]);
+  function convertData(data) {
+    // console.log(data);
+    data.map((element) => vendorGridData.vendorName.push(element.name));
+    data.map((element) => vendorGridData.successURL.push(element.successurl));
+    data.map((element) =>
+      vendorGridData.terminateURL.push(element.terminateurl)
+    );
+    data.map((element) =>
+      vendorGridData.quotafullURL.push(element.quota_fullurl)
+    );
+    data.map((element) => vendorGridData.costPerSurvey.push(element.rate));
+
+    let userDataConverted = [];
+    const keys = Object.keys(vendorGridData);
+    const numObjects = vendorGridData[keys[0]].length;
+    for (let i = 0; i < numObjects; i++) {
+      const newObj = {};
+      keys.forEach((key) => {
+        newObj[key] = vendorGridData[key][i];
+      });
+      userDataConverted = [...userDataConverted, newObj];
+    }
+    console.log("testing", userDataNew);
+
+    return userDataConverted;
+  }
 
   const cardArray = [
     {
@@ -40,6 +102,8 @@ const ProjectDetail = () => {
       costPerSurvey: "45",
     },
   ];
+
+  const vendorLength = cardArray.length;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -173,7 +237,7 @@ const ProjectDetail = () => {
         {vendorLength === 0 ? (
           <Typography textAlign={"center"}>No vendors assigned yet</Typography>
         ) : (
-          cardArray.slice(0, vendorLength).map((item, index) => (
+          userDataNew.slice(0, vendorLength).map((item, index) => (
             <Grid
               item
               container

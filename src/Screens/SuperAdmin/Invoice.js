@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Paper, useMediaQuery } from "@mui/material";
 import InvoiceImage from "./../../Images/Invoice/InvoiceImage.svg";
 import "./Style.css";
@@ -7,9 +7,10 @@ import { MuiTextField } from "../../MuiComponents/MuiTextField/Index";
 import MuiContainedButton from "../../MuiComponents/MuiContainedButton/Index";
 import InvoiceModal from "../../Components/InvoiceModal/Index";
 import Layout from "./Layout";
+import { API_PREFIX } from "../../config";
 
 const Invoice = () => {
-  const [vendor, setVendor] = useState("");
+  const [client, setClient] = useState("");
   const [project, setProject] = useState("");
   const [country, setCountry] = useState("");
   const [currency, setCurrency] = useState("");
@@ -17,10 +18,24 @@ const Invoice = () => {
   const [successfulSurveys, setSuccessfulSurveys] = useState("");
   const [costPerSurvey, setCostPerSurvey] = useState("");
   const [show, setShow] = useState(false);
+  const [responseData, setResponseData] = useState(false);
+  const [projectOptions, setProjectOptions] = useState([]);
+  const [clientOptions, setClientOptions] = useState([]);
 
   const isMobile = useMediaQuery("(max-width:600px)");
 
-  const onChangeVendor = (e) => setVendor(e.target.value);
+  const onChangeClient = (e) => {
+    const selectedClient = e.target.value;
+    setClient(selectedClient);
+
+    const clientData = responseData.find(
+      (client) =>
+        client.contact_name === selectedClient || client.name === selectedClient
+    );
+    if (clientData) {
+      setCountry(clientData.country);
+    }
+  };
   const onChangeProject = (e) => setProject(e.target.value);
   const onChangeCountry = (e) => setCountry(e.target.value);
   const onChangeCurrency = (e) => setCurrency(e.target.value);
@@ -32,6 +47,34 @@ const Invoice = () => {
     e.preventDefault();
     setShow(true);
   };
+
+  useEffect(() => {
+    getProjectData();
+  }, []);
+
+  function getProjectData() {
+    fetch(`${API_PREFIX}getProjectList`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        setResponseData(data);
+        const projectNames = data.map((project) => project.project_name);
+        const clientNames = data.map((client) => client.name);
+        setProjectOptions(projectNames);
+        setClientOptions(clientNames);
+        // console.log("response Data", data);
+      })
+      .catch(function (error) {
+        console.error("Error fetching data:", error);
+      });
+  }
 
   const handleClose = () => setShow(false);
 
@@ -48,19 +91,19 @@ const Invoice = () => {
             <form onSubmit={handleSubmit}>
               <Grid item xs={12} className="addPadding">
                 <MuiDropDown
-                  value={vendor}
-                  onChange={onChangeVendor}
-                  options={["client 1", "client 2", "client 3"]}
-                  label="Vendor"
+                  value={project}
+                  onChange={onChangeProject}
+                  options={projectOptions}
+                  label="Project"
                   className="forRegister"
                 />
               </Grid>
               <Grid item xs={12} className="addPadding">
                 <MuiDropDown
-                  value={project}
-                  onChange={onChangeProject}
-                  options={["project 1", "project 2", "project 3"]}
-                  label="Project"
+                  value={client}
+                  onChange={onChangeClient}
+                  options={clientOptions}
+                  label="Client"
                   className="forRegister"
                 />
               </Grid>
@@ -129,13 +172,13 @@ const Invoice = () => {
                     type="submit"
                   />
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   <MuiContainedButton
                     buttonText="Generate PO"
                     onClickFunction={handleSubmit}
                     type="button"
                   />
-                </Grid>
+                </Grid> */}
               </Grid>
             </form>
           </Paper>
@@ -149,7 +192,7 @@ const Invoice = () => {
       <InvoiceModal
         show={show}
         handleClose={handleClose}
-        ClientName={vendor}
+        ClientName={client}
         costPerSurvey={costPerSurvey}
         successfulSurveys={successfulSurveys}
       />
